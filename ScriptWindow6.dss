@@ -1,0 +1,2188 @@
+Clear 
+
+New circuit.1 bus1=Sistema basekV=69 phases=3 mvasc=729 mvasc1=723
+
+AddBusMarker Bus=Sistema Code=36 color=Red size=2
+AddBusMarker Bus=1 Code=36 color=Red size=2
+AddBusMarker Bus=101 Code=36 color=Red size=2
+AddBusMarker Bus=201 Code=36 color=Red size=2
+AddBusMarker Bus=401 Code=36 color=Red size=2
+AddBusMarker Bus=501 Code=36 color=Red size=2
+AddBusMarker Bus=701 Code=36 color=Red size=2
+
+AddBusMarker Bus=1400 Code=36 color=Green size=2
+AddBusMarker Bus=2000 Code=36 color=Green size=2
+AddBusMarker Bus=2800 Code=36 color=Green size=2
+AddBusMarker Bus=3400 Code=36 color=Green size=2
+AddBusMarker Bus=4000 Code=36 color=Green size=2
+
+AddBusMarker Bus=1030 Code=36 color=Green size=2
+AddBusMarker Bus=12900 Code=36 color=Green size=2
+AddBusMarker Bus=12500 Code=36 color=Green size=2
+AddBusMarker Bus=14000 Code=36 color=Green size=2
+AddBusMarker Bus=17300 Code=36 color=Green size=2
+AddBusMarker Bus=16300 Code=36 color=Green size=2
+
+AddBusMarker Bus=2030 Code=36 color=Green size=2
+AddBusMarker Bus=20900 Code=36 color=Green size=2
+AddBusMarker Bus=22400 Code=36 color=Green size=2
+AddBusMarker Bus=22900 Code=36 color=Green size=2
+AddBusMarker Bus=23400 Code=36 color=Green size=2
+AddBusMarker Bus=25600 Code=36 color=Green size=2
+AddBusMarker Bus=26100 Code=36 color=Green size=2
+AddBusMarker Bus=27200 Code=36 color=Green size=2
+AddBusMarker Bus=27900 Code=36 color=Green size=2
+AddBusMarker Bus=32000 Code=36 color=Green size=2
+AddBusMarker Bus=34100 Code=36 color=Green size=2
+
+AddBusMarker Bus=4020 Code=36 color=Green size=2
+AddBusMarker Bus=43200 Code=36 color=Green size=2
+AddBusMarker Bus=47200 Code=36 color=Green size=2
+AddBusMarker Bus=44000 Code=36 color=Green size=2
+
+AddBusMarker Bus=5020 Code=36 color=Green size=2
+AddBusMarker Bus=50400 Code=36 color=Green size=2
+AddBusMarker Bus=51400 Code=36 color=Green size=2
+AddBusMarker Bus=53200 Code=36 color=Green size=2
+AddBusMarker Bus=54000 Code=36 color=Green size=2
+AddBusMarker Bus=55900 Code=36 color=Green size=2
+AddBusMarker Bus=56600 Code=36 color=Green size=2
+AddBusMarker Bus=57500 Code=36 color=Green size=2
+AddBusMarker Bus=58100 Code=36 color=Green size=2
+AddBusMarker Bus=60700 Code=36 color=Green size=2
+
+
+//Linha trifásica equilibrada 95 mm² 
+new linecode.arranjo1 nphases=3 basefreq=60 units=km 
+~ r1=0.2352 x1=0.1090 r0=2.0352 x0=2.5325 !ohm/km 
+
+//Linha trifásica equilibrada 50 mm² 
+new linecode.arranjo2 nphases=3 basefreq=60 units=km 
+~ r1=0.4450 x1=0.1127 r0=2.2450 x0=2.5991 !ohm/km 
+
+//Linha trifásica equilibrada 25 mm² 
+new linecode.arranjo3 nphases=3 basefreq=60 units=km 
+~ r1=0.8891 x1=0.1164 r0=2.6891 x0=2.6692 !ohm/km 
+
+//Linha trifásica equilibrada 16 mm² BT 
+new linecode.arranjo4 nphases=3 basefreq=60 units=km 
+~ r1=1.3899 x1=0.1173 r0=3.189 x0=2.7173 !ohm/km 
+
+//Linha trifásica equilibrada 16 mm² MT 
+new linecode.arranjo5 nphases=3 basefreq=60 units=km 
+~ r1=1.554 x1=0.373 r0=0.18 x0=0.40 !ohm/km 
+
+//Linha trifásica equilibrada 120 mm² MT 
+new linecode.arranjo6 nphases=3 basefreq=60 units=km 
+~ r1=0.1993 x1=0.1554 r0=2.0184 x0=1.5179 !ohm/km 
+
+//Linha trifásica equilibrada 500 mm² MT 
+new linecode.arranjo7 nphases=3 basefreq=60 units=km 
+~ r1=0.0531 x1=0.1297 r0=1.7271 x0=1.1109 !ohm/km 
+
+
+//Planta solar 
+//new XYcurve.Efic npts=4 xarray=[0.1 0.2 0.4 1] yarray=[0.86 0.9 0.93 0.97] 
+//New Loadshape.Irradiação npts=24 interval=1 
+//~ mult=( 0 0 0 0 0 0 0.1 0.2 0.3 0.4 0.5 0.8 1 1 1 0.9 0.7 0.1 0 0 0 0 0 0) 
+//new Tshape.temppainel npts=24 interval=1 
+//~ temp= [25 25 25 25 25 25 25 30 40 50 60 60 70 70 65 50 50 40 25 25 25 25 25 25] 
+//new PVSystem.PV phases=3 bus1=330 kv=0.38 kVA=70 irrad=1 temperature=25 pf=1 
+//~ %cutin=0.1 %cutout=0.1 Effcurve=Efic Daily=Irradiação TDaily=temppainel 
+
+
+new line.linha1 phases=3 bus1=Sistema bus2=1 linecode=arranjo7 length=2 units=m 
+
+//Trafo 30 delta estrela aterrada saindo o neutro PARA 1
+new transformer.TrafoSET xhl=0.25 windings=2 %loadloss=0.7 %noloadloss=0.28 %imag=2 
+~ wdg=1 bus=1 kv=69 kva=15000 conn=delta 
+~ wdg=2 bus=2S kv=13.8 kva=15000 conn=wye 
+
+
+new line.linha700 phases=3 bus1=2S bus2=701 linecode=arranjo7 length=2 units=m 
+
+new line.linha100 phases=3 bus1=2S bus2=101 linecode=arranjo7 length=2 units=m 
+
+new line.linha200 phases=3 bus1=2S bus2=201 linecode=arranjo7 length=2 units=m 
+
+new line.linha400 phases=3 bus1=2S bus2=401 linecode=arranjo7 length=2 units=m
+
+new line.linha500 phases=3 bus1=2S bus2=501 linecode=arranjo7 length=2 units=m
+
+
+
+//Trafo 30 delta estrela aterrada saindo o neutro PARA 1
+new transformer.Trafo1 xhl=0.5 windings=2 %loadloss=1.1267 %noloadloss=0.28 %imag=0.5 
+~ wdg=1 bus=701 kv=13.8 kva=2500 conn=delta 
+~ wdg=2 bus=702 kv=13.8 kva=2500 conn=wye 
+
+//Trafo 30 delta estrela aterrada saindo o neutro PARA 101 
+new transformer.Trafo101 xhl=3.5 windings=2 %loadloss=1.1267 %noloadloss=0.28 %imag=0.5 
+~ wdg=1 bus=101 kv=13.8 kva=2500 conn=delta 
+~ wdg=2 bus=102 kv=13.8 kva=2500 conn=wye 
+
+//Trafo 30 delta estrela aterrada saindo o neutro PARA 201
+new transformer.Trafo201 xhl=3.5 windings=2 %loadloss=1.1267 %noloadloss=0.28 %imag=0.5 
+~ wdg=1 bus=201 kv=13.8 kva=2500 conn=delta 
+~ wdg=2 bus=202 kv=13.8 kva=2500 conn=wye 
+
+//Trafo 30 delta estrela aterrada saindo o neutro PARA 401
+new transformer.Trafo401 xhl=3.5 windings=2 %loadloss=1.1267 %noloadloss=0.28 %imag=0.5 
+~ wdg=1 bus=401 kv=13.8 kva=2500 conn=delta 
+~ wdg=2 bus=402 kv=13.8 kva=2500 conn=wye 
+
+//Trafo 30 delta estrela aterrada saindo o neutro PARA 501
+new transformer.Trafo501 xhl=3.5 windings=2 %loadloss=1.1267 %noloadloss=0.28 %imag=0.5 
+~ wdg=1 bus=501 kv=13.8 kva=2500 conn=delta 
+~ wdg=2 bus=502 kv=13.8 kva=2500 conn=wye 
+
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+ 
+new line.linha2101 phases=3 bus1=702 bus2=2000 linecode=arranjo6 length=31 units=m 
+
+ 
+//new line.linha2103 phases=3 bus1=702 bus2=6610 linecode=arranjo1 length=31 units=m 
+//new line.linha2104 phases=3 bus1=702 bus2=7910 linecode=arranjo1 length=31 units=m 
+
+
+//Trafo 30 delta estrela aterrada saindo o neutro PARA 
+new transformer.Trafo230 xhl=0.25 windings=2 %loadloss=0.7 %noloadloss=0.28 %imag=2 
+~ wdg=1 bus=2000 kv=13.8 kva=300 conn=delta 
+~ wdg=2 bus=2001 kv=0.38 kva=300 conn=wye 
+
+new line.linha2800 phases=3 bus1=702 bus2=2800 linecode=arranjo6 length=31 units=m 
+
+//Trafo 30 delta estrela aterrada saindo o neutro PARA 
+new transformer.Trafo280 xhl=3.5 windings=2 %loadloss=1.1267 %noloadloss=0.28 %imag=0.5 
+~ wdg=1 bus=2800 kv=13.8 kva=300 conn=delta 
+~ wdg=2 bus=2801 kv=0.38 kva=300 conn=wye 
+
+
+new line.linha3400 phases=3 bus1=702 bus2=3400 linecode=arranjo6 length=31 units=m 
+
+//Trafo 30 delta estrela aterrada saindo o neutro PARA 
+new transformer.Trafo340 xhl=3.5 windings=2 %loadloss=1.1267 %noloadloss=0.28 %imag=0.5 
+~ wdg=1 bus=3400 kv=13.8 kva=300 conn=delta 
+~ wdg=2 bus=3401 kv=0.38 kva=300 conn=wye 
+
+
+new line.linha1400 phases=3 bus1=702 bus2=1400 linecode=arranjo6 length=31 units=m 
+
+//Trafo 30 delta estrela aterrada saindo o neutro PARA 
+new transformer.Trafo140 xhl=3.5 windings=2 %loadloss=1.1267 %noloadloss=0.28 %imag=0.5 
+~ wdg=1 bus=1400 kv=13.8 kva=300 conn=delta 
+~ wdg=2 bus=1401 kv=0.38 kva=300 conn=wye 
+
+
+new line.linha4000 phases=3 bus1=702 bus2=4000 linecode=arranjo6 length=31 units=m 
+
+//Trafo 30 delta estrela aterrada saindo o neutro PARA 
+new transformer.Trafo4000 xhl=3.5 windings=2 %loadloss=1.1267 %noloadloss=0.28 %imag=0.5 
+~ wdg=1 bus=4000 kv=13.8 kva=300 conn=delta 
+~ wdg=2 bus=4001 kv=0.38 kva=300 conn=wye 
+
+
+
+
+
+new line.linha2102 phases=3 bus1=2001 bus2=2 linecode=arranjo1 length=31 units=m
+
+new line.linha2803 phases=3 bus1=2801 bus2=28 linecode=arranjo1 length=31 units=m
+
+new line.linha3403 phases=3 bus1=3401 bus2=34 linecode=arranjo1 length=31 units=m
+
+new line.linha1403 phases=3 bus1=1401 bus2=14 linecode=arranjo1 length=31 units=m
+
+new line.linha4003 phases=3 bus1=4001 bus2=4 linecode=arranjo1 length=31 units=m
+
+
+
+new line.linha2 phases=3 bus1=2 bus2=3 linecode=arranjo4 length=38 units=m 
+
+//new line.linha3 phases=3 bus1=3 bus2=4 linecode=arranjo4 length=38 units=m 
+
+new line.linha4 phases=3 bus1=4 bus2=5 linecode=arranjo4 length=1 units=m
+
+new line.linha5 phases=3 bus1=5 bus2=6 linecode=arranjo1 length=31 units=m 
+
+new line.linha6 phases=3 bus1=6 bus2=7 linecode=arranjo4 length=38 units=m 
+
+new line.linha7 phases=3 bus1=7 bus2=8 linecode=arranjo4 length=1 units=m
+
+new line.linha8 phases=3 bus1=8 bus2=9 linecode=arranjo1 length=31 units=m 
+
+new line.linha9 phases=3 bus1=9 bus2=10 linecode=arranjo4 length=38 units=m 
+
+new line.linha10 phases=3 bus1=10 bus2=11 linecode=arranjo4 length=1 units=m
+
+new line.linha11 phases=3 bus1=11 bus2=12 linecode=arranjo1 length=31 units=m 
+
+new line.linha12 phases=3 bus1=3 bus2=13 linecode=arranjo4 length=38 units=m 
+
+//new line.linha13 phases=3 bus1=4 bus2=14 linecode=arranjo4 length=38 units=m 
+
+new line.linha14 phases=3 bus1=5 bus2=15 linecode=arranjo1 length=31 units=m 
+
+new line.linha15 phases=3 bus1=6 bus2=16 linecode=arranjo4 length=38 units=m 
+
+new line.linha16 phases=3 bus1=8 bus2=17 linecode=arranjo4 length=1 units=m
+
+new line.linha17 phases=3 bus1=9 bus2=18 linecode=arranjo1 length=31 units=m 
+
+new line.linha18 phases=3 bus1=10 bus2=19 linecode=arranjo4 length=38 units=m 
+
+new line.linha19 phases=3 bus1=19 bus2=20 linecode=arranjo4 length=1 units=m
+
+new line.linha20 phases=3 bus1=19 bus2=21 linecode=arranjo1 length=31 units=m 
+
+new line.linha21 phases=3 bus1=2  bus2=22 linecode=arranjo4 length=38 units=m 
+
+new line.linha22 phases=3 bus1=22 bus2=23 linecode=arranjo4 length=38 units=m 
+
+new line.linha23 phases=3 bus1=23 bus2=24 linecode=arranjo1 length=31 units=m 
+
+new line.linha24 phases=3 bus1=24 bus2=25 linecode=arranjo4 length=38 units=m 
+
+new line.linha25 phases=3 bus1=25 bus2=26 linecode=arranjo4 length=1 units=m
+
+new line.linha26 phases=3 bus1=26 bus2=27 linecode=arranjo1 length=31 units=m 
+
+//new line.linha27 phases=3 bus1=27 bus2=28 linecode=arranjo4 length=38 units=m 
+
+new line.linha28 phases=3 bus1=28 bus2=29 linecode=arranjo4 length=1 units=m
+
+new line.linha29 phases=3 bus1=2  bus2=30 linecode=arranjo1 length=31 units=m 
+
+new line.linha30 phases=3 bus1=30 bus2=31 linecode=arranjo4 length=38 units=m 
+
+new line.linha31 phases=3 bus1=31 bus2=32 linecode=arranjo4 length=1 units=m
+
+new line.linha32 phases=3 bus1=32 bus2=33 linecode=arranjo1 length=31 units=m 
+
+//new line.linha33 phases=3 bus1=33 bus2=34 linecode=arranjo4 length=38 units=m 
+
+new line.linha34 phases=3 bus1=34 bus2=35 linecode=arranjo4 length=38 units=m 
+
+new line.linha35 phases=3 bus1=35 bus2=36 linecode=arranjo1 length=31 units=m 
+
+new line.linha36 phases=3 bus1=36 bus2=37 linecode=arranjo4 length=38 units=m 
+
+new line.linha37 phases=3 bus1=37 bus2=38 linecode=arranjo4 length=1 units=m
+
+new line.linha38 phases=3 bus1=38 bus2=39 linecode=arranjo1 length=31 units=m 
+
+new line.linha39 phases=3 bus1=39 bus2=40 linecode=arranjo4 length=38 units=m 
+
+new line.linha40 phases=3 bus1=31 bus2=41 linecode=arranjo4 length=1 units=m
+
+new line.linha41 phases=3 bus1=32 bus2=42 linecode=arranjo1 length=31 units=m 
+
+new line.linha42 phases=3 bus1=33 bus2=43 linecode=arranjo4 length=38 units=m 
+
+new line.linha43 phases=3 bus1=43 bus2=45 linecode=arranjo4 length=38 units=m 
+
+new line.linha44 phases=3 bus1=43 bus2=44 linecode=arranjo4 length=38 units=m 
+
+new line.linha45 phases=3 bus1=35 bus2=46 linecode=arranjo4 length=1 units=m
+
+new line.linha46 phases=3 bus1=46 bus2=48 linecode=arranjo1 length=31 units=m 
+
+new line.linha47 phases=3 bus1=46 bus2=47 linecode=arranjo4 length=38 units=m 
+
+new line.linha48 phases=3 bus1=36 bus2=49 linecode=arranjo4 length=38 units=m 
+
+new line.linha49 phases=3 bus1=37 bus2=50 linecode=arranjo1 length=31 units=m 
+
+new line.linha50 phases=3 bus1=38 bus2=51 linecode=arranjo4 length=38 units=m 
+
+new line.linha51 phases=3 bus1=39 bus2=40 linecode=arranjo4 length=1 units=m
+
+new line.linha52 phases=3 bus1=34 bus2=52 linecode=arranjo1 length=31 units=m 
+
+new line.linha53 phases=3 bus1=52 bus2=53 linecode=arranjo4 length=38 units=m 
+
+new line.linha54 phases=3 bus1=53 bus2=54 linecode=arranjo4 length=1 units=m
+
+new line.linha55 phases=3 bus1=54 bus2=55 linecode=arranjo1 length=31 units=m 
+
+new line.linha56 phases=3 bus1=55 bus2=95 linecode=arranjo4 length=38 units=m 
+
+new line.linha57 phases=3 bus1=95 bus2=96 linecode=arranjo4 length=38 units=m 
+
+new line.linha58 phases=3 bus1=55 bus2=59 linecode=arranjo1 length=31 units=m 
+
+new line.linha59 phases=3 bus1=59 bus2=62 linecode=arranjo4 length=38 units=m 
+
+new line.linha60 phases=3 bus1=59 bus2=63 linecode=arranjo4 length=1 units=m
+
+new line.linha61 phases=3 bus1=59 bus2=60 linecode=arranjo1 length=31 units=m 
+
+new line.linha62 phases=3 bus1=60 bus2=61 linecode=arranjo4 length=38 units=m 
+
+new line.linha63 phases=3 bus1=63 bus2=64 linecode=arranjo4 length=1 units=m
+
+new line.linha64 phases=3 bus1=63 bus2=65 linecode=arranjo1 length=31 units=m 
+
+new line.linha65 phases=3 bus1=54 bus2=58 linecode=arranjo4 length=38 units=m 
+
+new line.linha66 phases=3 bus1=53 bus2=57 linecode=arranjo4 length=1 units=m
+
+new line.linha67 phases=3 bus1=52 bus2=56 linecode=arranjo1 length=31 units=m 
+
+new line.linha68 phases=3 bus1=30 bus2=66 linecode=arranjo4 length=38 units=m 
+
+new line.linha69 phases=3 bus1=66 bus2=67 linecode=arranjo4 length=38 units=m 
+
+new line.linha70 phases=3 bus1=67 bus2=68 linecode=arranjo1 length=31 units=m 
+
+new line.linha71 phases=3 bus1=68 bus2=69 linecode=arranjo4 length=38 units=m 
+
+new line.linha72 phases=3 bus1=69 bus2=70 linecode=arranjo4 length=1 units=m
+
+new line.linha73 phases=3 bus1=69 bus2=71 linecode=arranjo1 length=31 units=m 
+
+new line.linha74 phases=3 bus1=71 bus2=73 linecode=arranjo4 length=38 units=m 
+
+new line.linha75 phases=3 bus1=71 bus2=72 linecode=arranjo4 length=1 units=m
+
+new line.linha76 phases=3 bus1=68 bus2=74 linecode=arranjo1 length=31 units=m 
+
+new line.linha77 phases=3 bus1=67 bus2=75 linecode=arranjo4 length=38 units=m 
+
+new line.linha78 phases=3 bus1=66 bus2=76 linecode=arranjo4 length=38 units=m 
+
+new line.linha79 phases=3 bus1=76 bus2=78 linecode=arranjo4 length=38 units=m 
+
+new line.linha80 phases=3 bus1=76 bus2=77 linecode=arranjo1 length=31 units=m 
+
+new line.linha81 phases=3 bus1=66 bus2=79 linecode=arranjo4 length=38 units=m 
+
+new line.linha82 phases=3 bus1=79 bus2=80 linecode=arranjo4 length=38 units=m 
+
+new line.linha83 phases=3 bus1=79 bus2=82 linecode=arranjo1 length=31 units=m 
+
+new line.linha84 phases=3 bus1=79 bus2=81 linecode=arranjo4 length=38 units=m 
+
+new line.linha85 phases=3 bus1=82 bus2=83 linecode=arranjo1 length=31 units=m 
+
+new line.linha86 phases=3 bus1=83 bus2=84 linecode=arranjo4 length=38 units=m 
+
+new line.linha87 phases=3 bus1=83 bus2=85 linecode=arranjo4 length=1 units=m
+
+new line.linha88 phases=3 bus1=83 bus2=86 linecode=arranjo1 length=31 units=m 
+
+new line.linha89 phases=3 bus1=82 bus2=87 linecode=arranjo4 length=38 units=m 
+
+new line.linha90 phases=3 bus1=87 bus2=88 linecode=arranjo4 length=1 units=m
+
+new line.linha91 phases=3 bus1=87 bus2=89 linecode=arranjo4 length=38 units=m 
+
+new line.linha92 phases=3 bus1=89 bus2=90 linecode=arranjo4 length=1 units=m
+
+new line.linha93 phases=3 bus1=89 bus2=91 linecode=arranjo1 length=31 units=m 
+
+new line.linha94 phases=3 bus1=28 bus2=92 linecode=arranjo4 length=38 units=m 
+
+new line.linha95 phases=3 bus1=92 bus2=93 linecode=arranjo4 length=1 units=m
+
+new line.linha96 phases=3 bus1=92 bus2=97 linecode=arranjo1 length=31 units=m 
+
+
+new line.linha1020 phases=3 bus1=102 bus2=1030 linecode=arranjo1 length=31 units=m
+
+//Trafo 30 delta estrela aterrada saindo o neutro PARA 501
+new transformer.Trafo102103 xhl=3.5 windings=2 %loadloss=1.1267 %noloadloss=0.28 %imag=0.5 
+~ wdg=1 bus=1030 kv=13.8 kva=300 conn=delta 
+~ wdg=2 bus=1031 kv=0.38 kva=300 conn=wye 
+
+new line.linha12900 phases=3 bus1=102 bus2=12900 linecode=arranjo6 length=31 units=m 
+
+//Trafo 30 delta estrela aterrada saindo o neutro PARA 
+new transformer.Trafo12900 xhl=3.5 windings=2 %loadloss=1.1267 %noloadloss=0.28 %imag=0.5 
+~ wdg=1 bus=12900 kv=13.8 kva=300 conn=delta 
+~ wdg=2 bus=12901 kv=0.38 kva=300 conn=wye 
+
+
+new line.linha12500 phases=3 bus1=102 bus2=12500 linecode=arranjo6 length=31 units=m 
+
+//Trafo 30 delta estrela aterrada saindo o neutro PARA 
+new transformer.Trafo12500 xhl=3.5 windings=2 %loadloss=1.1267 %noloadloss=0.28 %imag=0.5 
+~ wdg=1 bus=12500 kv=13.8 kva=300 conn=delta 
+~ wdg=2 bus=12501 kv=0.38 kva=300 conn=wye 
+
+
+new line.linha14000 phases=3 bus1=102 bus2=14000 linecode=arranjo6 length=31 units=m 
+
+//Trafo 30 delta estrela aterrada saindo o neutro PARA 
+new transformer.Trafo14000 xhl=3.5 windings=2 %loadloss=1.1267 %noloadloss=0.28 %imag=0.5 
+~ wdg=1 bus=14000 kv=13.8 kva=300 conn=delta 
+~ wdg=2 bus=14001 kv=0.38 kva=300 conn=wye 
+
+
+new line.linha16300 phases=3 bus1=102 bus2=16300 linecode=arranjo6 length=31 units=m 
+
+//Trafo 30 delta estrela aterrada saindo o neutro PARA 
+new transformer.Trafo16300 xhl=3.5 windings=2 %loadloss=1.1267 %noloadloss=0.28 %imag=0.5 
+~ wdg=1 bus=16300 kv=13.8 kva=300 conn=delta 
+~ wdg=2 bus=16301 kv=0.38 kva=300 conn=wye 
+
+
+new line.linha17300 phases=3 bus1=102 bus2=17300 linecode=arranjo6 length=31 units=m 
+
+//Trafo 30 delta estrela aterrada saindo o neutro PARA 
+new transformer.Trafo17300 xhl=3.5 windings=2 %loadloss=1.1267 %noloadloss=0.28 %imag=0.5 
+~ wdg=1 bus=17300 kv=13.8 kva=300 conn=delta 
+~ wdg=2 bus=17301 kv=0.38 kva=300 conn=wye
+
+
+new line.linha12903 phases=3 bus1=12901 bus2=129 linecode=arranjo1 length=31 units=m 
+
+new line.linha12503 phases=3 bus1=12501 bus2=125 linecode=arranjo1 length=31 units=m 
+
+new line.linha16303 phases=3 bus1=16301 bus2=163 linecode=arranjo1 length=31 units=m 
+
+new line.linha14003 phases=3 bus1=14001 bus2=140 linecode=arranjo1 length=31 units=m 
+
+new line.linha17303 phases=3 bus1=17301 bus2=173 linecode=arranjo1 length=31 units=m 
+ 
+
+new line.linha102 phases=3 bus1=1031 bus2=103 linecode=arranjo1 length=31 units=m 
+
+new line.linha103 phases=3 bus1=103 bus2=104 linecode=arranjo4 length=38 units=m 
+
+new line.linha104 phases=3 bus1=104 bus2=105 linecode=arranjo4 length=1 units=m
+
+new line.linha105 phases=3 bus1=103 bus2=106 linecode=arranjo1 length=31 units=m 
+
+new line.linha106 phases=3 bus1=106 bus2=107 linecode=arranjo4 length=38 units=m 
+
+new line.linha107 phases=3 bus1=106 bus2=110 linecode=arranjo4 length=1 units=m
+
+new line.linha108 phases=3 bus1=107 bus2=108 linecode=arranjo1 length=31 units=m 
+
+new line.linha109 phases=3 bus1=108 bus2=109 linecode=arranjo4 length=38 units=m 
+
+new line.linha110 phases=3 bus1=103 bus2=111 linecode=arranjo4 length=1 units=m
+
+new line.linha111 phases=3 bus1=111 bus2=112 linecode=arranjo1 length=31 units=m 
+
+new line.linha112 phases=3 bus1=111 bus2=117 linecode=arranjo4 length=38 units=m 
+
+new line.linha113 phases=3 bus1=111 bus2=113 linecode=arranjo4 length=38 units=m 
+
+new line.linha114 phases=3 bus1=113 bus2=114 linecode=arranjo1 length=31 units=m 
+
+new line.linha115 phases=3 bus1=113 bus2=115 linecode=arranjo4 length=38 units=m 
+
+new line.linha116 phases=3 bus1=115 bus2=116 linecode=arranjo4 length=1 units=m
+
+new line.linha117 phases=3 bus1=117 bus2=118 linecode=arranjo1 length=31 units=m 
+
+new line.linha118 phases=3 bus1=118 bus2=119 linecode=arranjo4 length=38 units=m 
+
+new line.linha119 phases=3 bus1=118 bus2=120 linecode=arranjo4 length=1 units=m
+
+new line.linha120 phases=3 bus1=117 bus2=121 linecode=arranjo1 length=31 units=m 
+
+//new line.linha121 phases=3 bus1=117 bus2=129 linecode=arranjo4 length=38 units=m 
+
+new line.linha122 phases=3 bus1=107 bus2=124 linecode=arranjo4 length=38 units=m 
+
+new line.linha123 phases=3 bus1=124 bus2=122 linecode=arranjo1 length=31 units=m 
+
+//new line.linha124 phases=3 bus1=124 bus2=125 linecode=arranjo4 length=38 units=m 
+
+new line.linha125 phases=3 bus1=122 bus2=123 linecode=arranjo4 length=1 units=m
+
+new line.linha126 phases=3 bus1=125 bus2=126 linecode=arranjo1 length=31 units=m 
+
+new line.linha127 phases=3 bus1=125 bus2=126 linecode=arranjo4 length=38 units=m 
+
+new line.linha128 phases=3 bus1=126 bus2=127 linecode=arranjo4 length=1 units=m
+
+new line.linha129 phases=3 bus1=125 bus2=128 linecode=arranjo1 length=31 units=m 
+
+new line.linha130 phases=3 bus1=125 bus2=143 linecode=arranjo4 length=38 units=m 
+
+new line.linha131 phases=3 bus1=143 bus2=144 linecode=arranjo4 length=1 units=m
+
+new line.linha132 phases=3 bus1=144 bus2=145 linecode=arranjo4 length=1 units=m
+
+new line.linha133 phases=3 bus1=145 bus2=146 linecode=arranjo4 length=38 units=m 
+
+new line.linha134 phases=3 bus1=146 bus2=147 linecode=arranjo4 length=38 units=m 
+
+new line.linha135 phases=3 bus1=144 bus2=148 linecode=arranjo1 length=31 units=m 
+
+new line.linha136 phases=3 bus1=148 bus2=149 linecode=arranjo4 length=38 units=m 
+
+new line.linha137 phases=3 bus1=149 bus2=150 linecode=arranjo4 length=1 units=m
+
+new line.linha138 phases=3 bus1=150 bus2=151 linecode=arranjo1 length=31 units=m 
+
+new line.linha139 phases=3 bus1=150 bus2=170 linecode=arranjo4 length=38 units=m 
+
+new line.linha140 phases=3 bus1=170 bus2=171 linecode=arranjo4 length=1 units=m
+
+new line.linha141 phases=3 bus1=170 bus2=172 linecode=arranjo1 length=31 units=m 
+
+new line.linha142 phases=3 bus1=143 bus2=152 linecode=arranjo4 length=38 units=m 
+
+new line.linha143 phases=3 bus1=152 bus2=153 linecode=arranjo4 length=38 units=m 
+
+//new line.linha144 phases=3 bus1=152 bus2=173 linecode=arranjo4 length=38 units=m 
+
+new line.linha145 phases=3 bus1=173 bus2=174 linecode=arranjo4 length=1 units=m
+
+new line.linha146 phases=3 bus1=174 bus2=175 linecode=arranjo1 length=31 units=m 
+
+new line.linha147 phases=3 bus1=175 bus2=176 linecode=arranjo4 length=38 units=m 
+
+new line.linha148 phases=3 bus1=176 bus2=177 linecode=arranjo4 length=38 units=m 
+
+new line.linha149 phases=3 bus1=129 bus2=130 linecode=arranjo1 length=31 units=m 
+
+new line.linha150 phases=3 bus1=130 bus2=131 linecode=arranjo4 length=38 units=m 
+
+new line.linha151 phases=3 bus1=130 bus2=132 linecode=arranjo4 length=1 units=m
+
+new line.linha152 phases=3 bus1=132 bus2=133 linecode=arranjo1 length=31 units=m 
+
+new line.linha153 phases=3 bus1=130 bus2=134 linecode=arranjo4 length=38 units=m 
+
+new line.linha154 phases=3 bus1=134 bus2=135 linecode=arranjo4 length=1 units=m
+
+new line.linha155 phases=3 bus1=135 bus2=136 linecode=arranjo1 length=31 units=m 
+
+//new line.linha156 phases=3 bus1=134 bus2=140 linecode=arranjo4 length=38 units=m 
+
+new line.linha157 phases=3 bus1=140 bus2=141 linecode=arranjo4 length=38 units=m 
+
+new line.linha158 phases=3 bus1=141 bus2=142 linecode=arranjo1 length=31 units=m 
+
+new line.linha159 phases=3 bus1=140 bus2=154 linecode=arranjo4 length=38 units=m 
+
+new line.linha160 phases=3 bus1=154 bus2=155 linecode=arranjo4 length=1 units=m
+
+new line.linha161 phases=3 bus1=155 bus2=156 linecode=arranjo1 length=31 units=m 
+
+new line.linha162 phases=3 bus1=154 bus2=159 linecode=arranjo4 length=38 units=m 
+
+new line.linha163 phases=3 bus1=155 bus2=157 linecode=arranjo4 length=1 units=m
+
+new line.linha164 phases=3 bus1=157 bus2=158 linecode=arranjo1 length=31 units=m 
+
+new line.linha165 phases=3 bus1=157 bus2=166 linecode=arranjo4 length=38 units=m 
+
+new line.linha166 phases=3 bus1=166 bus2=167 linecode=arranjo4 length=1 units=m
+
+new line.linha167 phases=3 bus1=167 bus2=161 linecode=arranjo1 length=31 units=m 
+
+new line.linha168 phases=3 bus1=167 bus2=168 linecode=arranjo4 length=38 units=m 
+
+new line.linha169 phases=3 bus1=129 bus2=137 linecode=arranjo4 length=38 units=m 
+
+new line.linha170 phases=3 bus1=137 bus2=178 linecode=arranjo1 length=31 units=m 
+
+new line.linha171 phases=3 bus1=137 bus2=138 linecode=arranjo4 length=38 units=m 
+
+new line.linha172 phases=3 bus1=138 bus2=139 linecode=arranjo4 length=1 units=m
+
+//new line.linha173 phases=3 bus1=138 bus2=163 linecode=arranjo1 length=31 units=m 
+
+new line.linha174 phases=3 bus1=163 bus2=162 linecode=arranjo4 length=38 units=m 
+
+new line.linha175 phases=3 bus1=163 bus2=164 linecode=arranjo4 length=1 units=m
+
+new line.linha176 phases=3 bus1=163 bus2=165 linecode=arranjo1 length=31 units=m 
+
+new line.linha177 phases=3 bus1=165 bus2=169 linecode=arranjo4 length=38 units=m 
+
+new line.linha178 phases=3 bus1=165 bus2=160 linecode=arranjo4 length=38 units=m 
+
+
+new line.linha2020 phases=3 bus1=202 bus2=2030 linecode=arranjo1 length=31 units=m
+
+//Trafo 30 delta estrela aterrada saindo o neutro PARA 501
+new transformer.Trafo202203 xhl=3.5 windings=2 %loadloss=1.1267 %noloadloss=0.28 %imag=0.5 
+~ wdg=1 bus=2030 kv=13.8 kva=300 conn=delta 
+~ wdg=2 bus=2031 kv=0.38 kva=300 conn=wye 
+
+
+
+new line.linha27200 phases=3 bus1=202 bus2=27200 linecode=arranjo6 length=31 units=m 
+
+//Trafo 30 delta estrela aterrada saindo o neutro PARA 
+new transformer.Trafo27200 xhl=3.5 windings=2 %loadloss=1.1267 %noloadloss=0.28 %imag=0.5 
+~ wdg=1 bus=27200 kv=13.8 kva=300 conn=delta 
+~ wdg=2 bus=27201 kv=0.38 kva=300 conn=wye 
+
+
+new line.linha22900 phases=3 bus1=202 bus2=22900 linecode=arranjo6 length=31 units=m 
+
+//Trafo 30 delta estrela aterrada saindo o neutro PARA 
+new transformer.Trafo22900 xhl=3.5 windings=2 %loadloss=1.1267 %noloadloss=0.28 %imag=0.5 
+~ wdg=1 bus=22900 kv=13.8 kva=300 conn=delta 
+~ wdg=2 bus=22901 kv=0.38 kva=300 conn=wye 
+
+
+new line.linha32000 phases=3 bus1=202 bus2=32000 linecode=arranjo6 length=31 units=m 
+
+//Trafo 30 delta estrela aterrada saindo o neutro PARA 
+new transformer.Trafo32000 xhl=3.5 windings=2 %loadloss=1.1267 %noloadloss=0.28 %imag=0.5 
+~ wdg=1 bus=32000 kv=13.8 kva=300 conn=delta 
+~ wdg=2 bus=32001 kv=0.38 kva=300 conn=wye 
+
+
+new line.linha20900 phases=3 bus1=202 bus2=20900 linecode=arranjo6 length=31 units=m 
+
+//Trafo 30 delta estrela aterrada saindo o neutro PARA 
+new transformer.Trafo20900 xhl=3.5 windings=2 %loadloss=1.1267 %noloadloss=0.28 %imag=0.5 
+~ wdg=1 bus=20900 kv=13.8 kva=300 conn=delta 
+~ wdg=2 bus=20901 kv=0.38 kva=300 conn=wye 
+
+
+new line.linha26100 phases=3 bus1=202 bus2=26100 linecode=arranjo6 length=31 units=m 
+
+//Trafo 30 delta estrela aterrada saindo o neutro PARA 
+new transformer.Trafo26100 xhl=3.5 windings=2 %loadloss=1.1267 %noloadloss=0.28 %imag=0.5 
+~ wdg=1 bus=26100 kv=13.8 kva=300 conn=delta 
+~ wdg=2 bus=26101 kv=0.38 kva=300 conn=wye
+
+
+new line.linha23400 phases=3 bus1=202 bus2=23400 linecode=arranjo6 length=31 units=m 
+
+//Trafo 30 delta estrela aterrada saindo o neutro PARA 
+new transformer.Trafo23400 xhl=3.5 windings=2 %loadloss=1.1267 %noloadloss=0.28 %imag=0.5 
+~ wdg=1 bus=23400 kv=13.8 kva=300 conn=delta 
+~ wdg=2 bus=23401 kv=0.38 kva=300 conn=wye
+
+
+new line.linha22400 phases=3 bus1=202 bus2=22400 linecode=arranjo6 length=31 units=m 
+
+//Trafo 30 delta estrela aterrada saindo o neutro PARA 
+new transformer.Trafo22400 xhl=3.5 windings=2 %loadloss=1.1267 %noloadloss=0.28 %imag=0.5 
+~ wdg=1 bus=22400 kv=13.8 kva=300 conn=delta 
+~ wdg=2 bus=22401 kv=0.38 kva=300 conn=wye
+
+
+new line.linha27900 phases=3 bus1=202 bus2=27900 linecode=arranjo6 length=31 units=m 
+
+//Trafo 30 delta estrela aterrada saindo o neutro PARA 
+new transformer.Trafo27900 xhl=3.5 windings=2 %loadloss=1.1267 %noloadloss=0.28 %imag=0.5 
+~ wdg=1 bus=27900 kv=13.8 kva=300 conn=delta 
+~ wdg=2 bus=27901 kv=0.38 kva=300 conn=wye
+
+
+new line.linha34100 phases=3 bus1=202 bus2=34100 linecode=arranjo6 length=31 units=m 
+
+//Trafo 30 delta estrela aterrada saindo o neutro PARA 
+new transformer.Trafo34100 xhl=3.5 windings=2 %loadloss=1.1267 %noloadloss=0.28 %imag=0.5 
+~ wdg=1 bus=34100 kv=13.8 kva=300 conn=delta 
+~ wdg=2 bus=34101 kv=0.38 kva=300 conn=wye
+
+
+new line.linha25600 phases=3 bus1=202 bus2=25600 linecode=arranjo6 length=31 units=m 
+
+//Trafo 30 delta estrela aterrada saindo o neutro PARA 
+new transformer.Trafo25600 xhl=3.5 windings=2 %loadloss=1.1267 %noloadloss=0.28 %imag=0.5 
+~ wdg=1 bus=25600 kv=13.8 kva=300 conn=delta 
+~ wdg=2 bus=25601 kv=0.38 kva=300 conn=wye
+
+
+new line.linha27203 phases=3 bus1=27201 bus2=272 linecode=arranjo1 length=31 units=m 
+
+new line.linha22903 phases=3 bus1=22901 bus2=229 linecode=arranjo1 length=31 units=m 
+
+new line.linha32003 phases=3 bus1=32001 bus2=320 linecode=arranjo1 length=31 units=m 
+
+new line.linha20903 phases=3 bus1=20901 bus2=209 linecode=arranjo1 length=31 units=m
+
+new line.linha26103 phases=3 bus1=26101 bus2=261 linecode=arranjo1 length=31 units=m
+
+new line.linha23403 phases=3 bus1=23401 bus2=234 linecode=arranjo1 length=31 units=m
+
+new line.linha22403 phases=3 bus1=23401 bus2=224 linecode=arranjo1 length=31 units=m
+
+new line.linha27903 phases=3 bus1=27901 bus2=279 linecode=arranjo1 length=31 units=m
+
+new line.linha34103 phases=3 bus1=34101 bus2=341 linecode=arranjo1 length=31 units=m
+
+new line.linha25603 phases=3 bus1=25601 bus2=256 linecode=arranjo1 length=31 units=m
+
+
+new line.linha202 phases=3 bus1=2031 bus2=203 linecode=arranjo1 length=31 units=m 
+
+new line.linha203 phases=3 bus1=203 bus2=204 linecode=arranjo4 length=38 units=m 
+
+new line.linha204 phases=3 bus1=203 bus2=205 linecode=arranjo4 length=1 units=m
+
+new line.linha205 phases=3 bus1=205 bus2=206 linecode=arranjo1 length=31 units=m 
+
+new line.linha206 phases=3 bus1=206 bus2=207 linecode=arranjo4 length=38 units=m 
+
+new line.linha207 phases=3 bus1=207 bus2=208 linecode=arranjo4 length=1 units=m
+
+//new line.linha208 phases=3 bus1=208 bus2=209 linecode=arranjo1 length=31 units=m 
+
+new line.linha209 phases=3 bus1=209 bus2=210 linecode=arranjo4 length=38 units=m 
+
+new line.linha210 phases=3 bus1=211 bus2=212 linecode=arranjo4 length=1 units=m
+
+new line.linha211 phases=3 bus1=212 bus2=213 linecode=arranjo1 length=31 units=m 
+
+new line.linha212 phases=3 bus1=213 bus2=214 linecode=arranjo4 length=38 units=m 
+
+new line.linha213 phases=3 bus1=213 bus2=215 linecode=arranjo4 length=38 units=m 
+
+new line.linha214 phases=3 bus1=207 bus2=247 linecode=arranjo1 length=31 units=m 
+
+new line.linha215 phases=3 bus1=247 bus2=217 linecode=arranjo4 length=38 units=m 
+
+new line.linha216 phases=3 bus1=247 bus2=216 linecode=arranjo4 length=1 units=m
+
+new line.linha217 phases=3 bus1=208 bus2=218 linecode=arranjo1 length=31 units=m 
+
+new line.linha218 phases=3 bus1=209 bus2=219 linecode=arranjo4 length=38 units=m 
+
+new line.linha219 phases=3 bus1=210 bus2=220 linecode=arranjo4 length=1 units=m
+
+new line.linha220 phases=3 bus1=211 bus2=221 linecode=arranjo1 length=31 units=m 
+
+new line.linha221 phases=3 bus1=203 bus2=222 linecode=arranjo4 length=38 units=m 
+
+//new line.linha222 phases=3 bus1=222 bus2=224 linecode=arranjo4 length=38 units=m 
+
+new line.linha223 phases=3 bus1=222 bus2=223 linecode=arranjo1 length=31 units=m 
+
+new line.linha224 phases=3 bus1=224 bus2=225 linecode=arranjo4 length=38 units=m 
+
+new line.linha225 phases=3 bus1=224 bus2=226 linecode=arranjo4 length=1 units=m
+
+new line.linha226 phases=3 bus1=226 bus2=227 linecode=arranjo1 length=31 units=m 
+
+new line.linha227 phases=3 bus1=226 bus2=240 linecode=arranjo4 length=38 units=m 
+
+new line.linha228 phases=3 bus1=226 bus2=228 linecode=arranjo4 length=1 units=m
+
+//new line.linha229 phases=3 bus1=228 bus2=229 linecode=arranjo1 length=31 units=m 
+
+new line.linha230 phases=3 bus1=229 bus2=230 linecode=arranjo4 length=38 units=m 
+
+new line.linha231 phases=3 bus1=230 bus2=231 linecode=arranjo4 length=1 units=m
+
+new line.linha232 phases=3 bus1=231 bus2=338 linecode=arranjo4 length=1 units=m
+
+new line.linha233 phases=3 bus1=338 bus2=339 linecode=arranjo4 length=38 units=m 
+
+new line.linha234 phases=3 bus1=339 bus2=366 linecode=arranjo4 length=38 units=m 
+
+new line.linha235 phases=3 bus1=339 bus2=367 linecode=arranjo1 length=31 units=m 
+
+new line.linha236 phases=3 bus1=231 bus2=232 linecode=arranjo4 length=38 units=m 
+
+new line.linha237 phases=3 bus1=232 bus2=340 linecode=arranjo4 length=1 units=m
+
+new line.linha238 phases=3 bus1=232 bus2=233 linecode=arranjo1 length=31 units=m 
+
+new line.linha239 phases=3 bus1=233 bus2=234 linecode=arranjo4 length=38 units=m 
+
+new line.linha240 phases=3 bus1=234 bus2=235 linecode=arranjo4 length=1 units=m
+
+new line.linha241 phases=3 bus1=235 bus2=236 linecode=arranjo1 length=31 units=m 
+
+new line.linha242 phases=3 bus1=236 bus2=329 linecode=arranjo4 length=38 units=m 
+
+new line.linha243 phases=3 bus1=329 bus2=330 linecode=arranjo4 length=38 units=m 
+
+new line.linha244 phases=3 bus1=330 bus2=331 linecode=arranjo4 length=38 units=m 
+
+new line.linha245 phases=3 bus1=331 bus2=332 linecode=arranjo4 length=1 units=m
+
+new line.linha246 phases=3 bus1=331 bus2=333 linecode=arranjo1 length=31 units=m 
+
+new line.linha247 phases=3 bus1=333 bus2=334 linecode=arranjo4 length=38 units=m 
+
+new line.linha248 phases=3 bus1=333 bus2=335 linecode=arranjo4 length=38 units=m 
+
+new line.linha249 phases=3 bus1=335 bus2=336 linecode=arranjo1 length=31 units=m 
+
+new line.linha250 phases=3 bus1=335 bus2=337 linecode=arranjo4 length=38 units=m 
+
+new line.linha251 phases=3 bus1=234 bus2=237 linecode=arranjo4 length=1 units=m
+
+new line.linha252 phases=3 bus1=237 bus2=238 linecode=arranjo1 length=31 units=m 
+
+new line.linha253 phases=3 bus1=238 bus2=239 linecode=arranjo4 length=38 units=m 
+
+new line.linha254 phases=3 bus1=239 bus2=325 linecode=arranjo4 length=1 units=m
+
+new line.linha255 phases=3 bus1=325 bus2=321 linecode=arranjo1 length=31 units=m 
+
+new line.linha256 phases=3 bus1=321 bus2=324 linecode=arranjo4 length=38 units=m 
+
+new line.linha257 phases=3 bus1=321 bus2=322 linecode=arranjo4 length=38 units=m 
+
+new line.linha258 phases=3 bus1=322 bus2=323 linecode=arranjo1 length=31 units=m 
+
+new line.linha259 phases=3 bus1=322 bus2=312 linecode=arranjo4 length=38 units=m 
+
+//new line.linha260 phases=3 bus1=233 bus2=320 linecode=arranjo4 length=1 units=m
+
+new line.linha261 phases=3 bus1=320 bus2=307 linecode=arranjo1 length=31 units=m 
+
+new line.linha262 phases=3 bus1=307 bus2=308 linecode=arranjo4 length=38 units=m 
+
+new line.linha263 phases=3 bus1=307 bus2=309 linecode=arranjo4 length=1 units=m
+
+new line.linha264 phases=3 bus1=309 bus2=310 linecode=arranjo1 length=31 units=m 
+
+new line.linha265 phases=3 bus1=310 bus2=311 linecode=arranjo4 length=38 units=m 
+
+new line.linha266 phases=3 bus1=307 bus2=303 linecode=arranjo4 length=1 units=m
+
+new line.linha267 phases=3 bus1=303 bus2=304 linecode=arranjo1 length=31 units=m 
+
+new line.linha268 phases=3 bus1=304 bus2=306 linecode=arranjo4 length=38 units=m 
+
+new line.linha269 phases=3 bus1=304 bus2=305 linecode=arranjo4 length=38 units=m 
+
+new line.linha270 phases=3 bus1=303 bus2=345 linecode=arranjo1 length=31 units=m 
+
+new line.linha271 phases=3 bus1=320 bus2=318 linecode=arranjo4 length=38 units=m 
+
+new line.linha272 phases=3 bus1=318 bus2=319 linecode=arranjo4 length=1 units=m
+
+new line.linha273 phases=3 bus1=318 bus2=313 linecode=arranjo1 length=31 units=m 
+
+new line.linha274 phases=3 bus1=313 bus2=317 linecode=arranjo4 length=38 units=m 
+
+new line.linha275 phases=3 bus1=313 bus2=316 linecode=arranjo4 length=1 units=m
+
+new line.linha276 phases=3 bus1=313 bus2=314 linecode=arranjo1 length=31 units=m 
+
+new line.linha277 phases=3 bus1=314 bus2=315 linecode=arranjo4 length=38 units=m 
+
+new line.linha278 phases=3 bus1=314 bus2=368 linecode=arranjo4 length=38 units=m 
+
+//new line.linha279 phases=3 bus1=231 bus2=341 linecode=arranjo4 length=38 units=m 
+
+new line.linha280 phases=3 bus1=341 bus2=343 linecode=arranjo1 length=31 units=m 
+
+new line.linha281 phases=3 bus1=343 bus2=344 linecode=arranjo4 length=38 units=m 
+
+new line.linha282 phases=3 bus1=343 bus2=301 linecode=arranjo4 length=38 units=m 
+
+new line.linha283 phases=3 bus1=301 bus2=302 linecode=arranjo1 length=31 units=m 
+
+new line.linha284 phases=3 bus1=301 bus2=299 linecode=arranjo4 length=38 units=m 
+
+new line.linha285 phases=3 bus1=299 bus2=354 linecode=arranjo1 length=31 units=m 
+
+new line.linha286 phases=3 bus1=299 bus2=298 linecode=arranjo4 length=38 units=m 
+
+new line.linha287 phases=3 bus1=298 bus2=297 linecode=arranjo4 length=1 units=m
+
+new line.linha288 phases=3 bus1=298 bus2=300 linecode=arranjo1 length=31 units=m 
+
+new line.linha289 phases=3 bus1=230 bus2=349 linecode=arranjo4 length=38 units=m 
+
+new line.linha290 phases=3 bus1=349 bus2=350 linecode=arranjo4 length=1 units=m
+
+new line.linha291 phases=3 bus1=349 bus2=348 linecode=arranjo4 length=38 units=m 
+
+new line.linha292 phases=3 bus1=348 bus2=347 linecode=arranjo4 length=1 units=m
+
+new line.linha293 phases=3 bus1=348 bus2=346 linecode=arranjo1 length=31 units=m 
+
+new line.linha294 phases=3 bus1=229 bus2=351 linecode=arranjo4 length=38 units=m 
+
+new line.linha295 phases=3 bus1=351 bus2=352 linecode=arranjo4 length=1 units=m
+
+new line.linha296 phases=3 bus1=351 bus2=353 linecode=arranjo1 length=31 units=m 
+
+new line.linha297 phases=3 bus1=224 bus2=241 linecode=arranjo1 length=31 units=m 
+
+new line.linha298 phases=3 bus1=241 bus2=243 linecode=arranjo1 length=31 units=m 
+
+new line.linha299 phases=3 bus1=243 bus2=248 linecode=arranjo1 length=31 units=m 
+
+new line.linha300 phases=3 bus1=243 bus2=245 linecode=arranjo1 length=31 units=m 
+
+new line.linha301 phases=3 bus1=243 bus2=244 linecode=arranjo1 length=31 units=m 
+ 
+new line.linha302 phases=3 bus1=245 bus2=246 linecode=arranjo1 length=31 units=m 
+
+new line.linha303 phases=3 bus1=245 bus2=249 linecode=arranjo4 length=38 units=m 
+
+new line.linha304 phases=3 bus1=241 bus2=242 linecode=arranjo4 length=1 units=m
+
+new line.linha305 phases=3 bus1=242 bus2=251 linecode=arranjo1 length=31 units=m 
+
+new line.linha306 phases=3 bus1=251 bus2=252 linecode=arranjo4 length=38 units=m 
+
+new line.linha307 phases=3 bus1=252 bus2=253 linecode=arranjo4 length=1 units=m
+
+new line.linha308 phases=3 bus1=252 bus2=255 linecode=arranjo1 length=31 units=m 
+
+//new line.linha309 phases=3 bus1=255 bus2=256 linecode=arranjo4 length=38 units=m 
+
+new line.linha310 phases=3 bus1=256 bus2=254 linecode=arranjo4 length=1 units=m
+
+new line.linha311 phases=3 bus1=256 bus2=257 linecode=arranjo1 length=31 units=m 
+
+new line.linha312 phases=3 bus1=257 bus2=258 linecode=arranjo4 length=38 units=m 
+
+new line.linha313 phases=3 bus1=257 bus2=259 linecode=arranjo4 length=38 units=m 
+
+//new line.linha314 phases=3 bus1=255 bus2=261 linecode=arranjo1 length=31 units=m 
+
+new line.linha315 phases=3 bus1=261 bus2=262 linecode=arranjo4 length=38 units=m 
+
+new line.linha316 phases=3 bus1=261 bus2=263 linecode=arranjo4 length=1 units=m
+
+new line.linha317 phases=3 bus1=263 bus2=250 linecode=arranjo1 length=31 units=m 
+
+new line.linha318 phases=3 bus1=263 bus2=264 linecode=arranjo4 length=38 units=m 
+
+new line.linha319 phases=3 bus1=264 bus2=265 linecode=arranjo4 length=1 units=m
+
+new line.linha320 phases=3 bus1=265 bus2=364 linecode=arranjo1 length=31 units=m 
+
+new line.linha321 phases=3 bus1=265 bus2=269 linecode=arranjo4 length=38 units=m 
+
+new line.linha322 phases=3 bus1=269 bus2=270 linecode=arranjo4 length=38 units=m 
+
+new line.linha323 phases=3 bus1=269 bus2=271 linecode=arranjo1 length=31 units=m 
+
+new line.linha324 phases=3 bus1=269 bus2=290 linecode=arranjo4 length=38 units=m 
+
+new line.linha325 phases=3 bus1=265 bus2=266 linecode=arranjo4 length=1 units=m
+
+new line.linha326 phases=3 bus1=266 bus2=267 linecode=arranjo1 length=31 units=m 
+
+new line.linha327 phases=3 bus1=266 bus2=268 linecode=arranjo4 length=38 units=m 
+
+//new line.linha328 phases=3 bus1=251 bus2=272 linecode=arranjo4 length=1 units=m
+
+new line.linha329 phases=3 bus1=272 bus2=273 linecode=arranjo1 length=31 units=m 
+
+new line.linha330 phases=3 bus1=273 bus2=275 linecode=arranjo4 length=38 units=m 
+
+new line.linha331 phases=3 bus1=275 bus2=277 linecode=arranjo4 length=1 units=m
+
+new line.linha332 phases=3 bus1=275 bus2=276 linecode=arranjo4 length=1 units=m
+
+new line.linha333 phases=3 bus1=276 bus2=278 linecode=arranjo4 length=38 units=m 
+
+new line.linha334 phases=3 bus1=273 bus2=274 linecode=arranjo4 length=38 units=m 
+
+new line.linha335 phases=3 bus1=274 bus2=260 linecode=arranjo1 length=31 units=m 
+
+//new line.linha336 phases=3 bus1=274 bus2=279 linecode=arranjo4 length=38 units=m 
+
+new line.linha337 phases=3 bus1=279 bus2=280 linecode=arranjo4 length=1 units=m
+
+new line.linha338 phases=3 bus1=280 bus2=281 linecode=arranjo1 length=31 units=m 
+
+new line.linha339 phases=3 bus1=282 bus2=283 linecode=arranjo4 length=38 units=m 
+
+new line.linha340 phases=3 bus1=283 bus2=284 linecode=arranjo4 length=1 units=m
+
+new line.linha341 phases=3 bus1=282 bus2=285 linecode=arranjo1 length=31 units=m 
+
+new line.linha342 phases=3 bus1=285 bus2=286 linecode=arranjo4 length=38 units=m 
+
+new line.linha343 phases=3 bus1=286 bus2=287 linecode=arranjo4 length=38 units=m 
+
+new line.linha344 phases=3 bus1=285 bus2=288 linecode=arranjo4 length=38 units=m 
+
+new line.linha345 phases=3 bus1=288 bus2=289 linecode=arranjo4 length=1 units=m
+
+new line.linha346 phases=3 bus1=289 bus2=291 linecode=arranjo1 length=31 units=m 
+
+new line.linha347 phases=3 bus1=289 bus2=292 linecode=arranjo4 length=38 units=m 
+
+new line.linha348 phases=3 bus1=288 bus2=293 linecode=arranjo4 length=38 units=m 
+
+new line.linha349 phases=3 bus1=293 bus2=294 linecode=arranjo1 length=31 units=m 
+
+new line.linha350 phases=3 bus1=294 bus2=295 linecode=arranjo4 length=38 units=m 
+
+new line.linha351 phases=3 bus1=293 bus2=296 linecode=arranjo4 length=1 units=m
+
+new line.linha352 phases=3 bus1=296 bus2=369 linecode=arranjo1 length=31 units=m 
+
+new line.linha353 phases=3 bus1=293 bus2=356 linecode=arranjo4 length=38 units=m 
+
+new line.linha354 phases=3 bus1=356 bus2=355 linecode=arranjo4 length=1 units=m
+
+new line.linha355 phases=3 bus1=356 bus2=358 linecode=arranjo1 length=31 units=m 
+
+new line.linha356 phases=3 bus1=358 bus2=359 linecode=arranjo4 length=38 units=m 
+
+new line.linha357 phases=3 bus1=358 bus2=357 linecode=arranjo4 length=38 units=m 
+
+new line.linha358 phases=3 bus1=264 bus2=362 linecode=arranjo1 length=31 units=m 
+
+new line.linha359 phases=3 bus1=362 bus2=363 linecode=arranjo4 length=38 units=m 
+
+new line.linha360 phases=3 bus1=363 bus2=360 linecode=arranjo4 length=1 units=m
+
+new line.linha361 phases=3 bus1=363 bus2=365 linecode=arranjo1 length=31 units=m 
+
+new line.linha362 phases=3 bus1=362 bus2=361 linecode=arranjo4 length=38 units=m 
+
+new line.linha363 phases=3 bus1=341 bus2=342 linecode=arranjo4 length=1 units=m
+
+new line.linha364 phases=3 bus1=263 bus2=370 linecode=arranjo4 length=1 units=m
+
+new line.linha365 phases=3 bus1=279 bus2=282 linecode=arranjo4 length=1 units=m
+
+new line.linha366 phases=3 bus1=210 bus2=211 linecode=arranjo4 length=1 units=m
+
+
+
+new line.linha4020 phases=3 bus1=402 bus2=4020 linecode=arranjo1 length=31 units=m
+
+//Trafo 30 delta estrela aterrada saindo o neutro PARA 501
+new transformer.Trafo402403 xhl=3.5 windings=2 %loadloss=1.1267 %noloadloss=0.28 %imag=0.5 
+~ wdg=1 bus=4020 kv=13.8 kva=300 conn=delta 
+~ wdg=2 bus=4021 kv=0.38 kva=300 conn=wye 
+
+
+
+new line.linha43200 phases=3 bus1=402 bus2=43200 linecode=arranjo6 length=31 units=m 
+
+//Trafo 30 delta estrela aterrada saindo o neutro PARA 
+new transformer.Trafo43200 xhl=3.5 windings=2 %loadloss=1.1267 %noloadloss=0.28 %imag=0.5 
+~ wdg=1 bus=43200 kv=13.8 kva=300 conn=delta 
+~ wdg=2 bus=43201 kv=0.38 kva=300 conn=wye 
+
+
+new line.linha47200 phases=3 bus1=402 bus2=47200 linecode=arranjo6 length=31 units=m 
+
+//Trafo 30 delta estrela aterrada saindo o neutro PARA 
+new transformer.Trafo47200 xhl=3.5 windings=2 %loadloss=1.1267 %noloadloss=0.28 %imag=0.5 
+~ wdg=1 bus=47200 kv=13.8 kva=300 conn=delta 
+~ wdg=2 bus=47201 kv=0.38 kva=300 conn=wye 
+
+
+new line.linha44000 phases=3 bus1=402 bus2=44000 linecode=arranjo6 length=31 units=m 
+
+//Trafo 30 delta estrela aterrada saindo o neutro PARA 
+new transformer.Trafo44000 xhl=3.5 windings=2 %loadloss=1.1267 %noloadloss=0.28 %imag=0.5 
+~ wdg=1 bus=44000 kv=13.8 kva=300 conn=delta 
+~ wdg=2 bus=44001 kv=0.38 kva=300 conn=wye 
+
+
+new line.linha43203 phases=3 bus1=43201 bus2=432 linecode=arranjo1 length=31 units=m 
+
+new line.linha47203 phases=3 bus1=47201 bus2=472 linecode=arranjo1 length=31 units=m 
+
+new line.linha44003 phases=3 bus1=44001 bus2=440 linecode=arranjo1 length=31 units=m 
+
+
+new line.linha402 phases=3 bus1=4021 bus2=403 linecode=arranjo1 length=31 units=m 
+
+new line.linha403 phases=3 bus1=4021 bus2=404 linecode=arranjo4 length=38 units=m 
+
+new line.linha404 phases=3 bus1=4021 bus2=405 linecode=arranjo4 length=1 units=m
+
+new line.linha405 phases=3 bus1=405 bus2=406 linecode=arranjo1 length=31 units=m 
+
+new line.linha406 phases=3 bus1=406 bus2=407 linecode=arranjo4 length=38 units=m 
+
+new line.linha407 phases=3 bus1=407 bus2=408 linecode=arranjo4 length=1 units=m
+
+new line.linha408 phases=3 bus1=407 bus2=409 linecode=arranjo1 length=31 units=m 
+
+new line.linha409 phases=3 bus1=406 bus2=410 linecode=arranjo4 length=38 units=m 
+
+new line.linha410 phases=3 bus1=410 bus2=411 linecode=arranjo4 length=1 units=m
+
+new line.linha411 phases=3 bus1=410 bus2=412 linecode=arranjo1 length=31 units=m 
+
+new line.linha412 phases=3 bus1=412 bus2=413 linecode=arranjo4 length=38 units=m 
+
+new line.linha413 phases=3 bus1=413 bus2=416 linecode=arranjo4 length=38 units=m 
+
+new line.linha414 phases=3 bus1=413 bus2=417 linecode=arranjo1 length=31 units=m 
+
+new line.linha415 phases=3 bus1=413 bus2=415 linecode=arranjo4 length=38 units=m 
+
+new line.linha416 phases=3 bus1=410 bus2=418 linecode=arranjo4 length=1 units=m
+
+new line.linha417 phases=3 bus1=418 bus2=419 linecode=arranjo1 length=31 units=m 
+
+new line.linha418 phases=3 bus1=419 bus2=420 linecode=arranjo4 length=38 units=m 
+
+new line.linha419 phases=3 bus1=419 bus2=421 linecode=arranjo4 length=1 units=m
+
+new line.linha420 phases=3 bus1=421 bus2=422 linecode=arranjo1 length=31 units=m 
+
+new line.linha421 phases=3 bus1=421 bus2=423 linecode=arranjo4 length=38 units=m 
+
+new line.linha422 phases=3 bus1=405 bus2=424 linecode=arranjo4 length=38 units=m 
+
+new line.linha423 phases=3 bus1=424 bus2=425 linecode=arranjo1 length=31 units=m 
+
+new line.linha424 phases=3 bus1=425 bus2=428 linecode=arranjo4 length=38 units=m 
+
+new line.linha425 phases=3 bus1=425 bus2=429 linecode=arranjo4 length=1 units=m
+
+new line.linha426 phases=3 bus1=425 bus2=426 linecode=arranjo1 length=31 units=m 
+
+new line.linha427 phases=3 bus1=426 bus2=427 linecode=arranjo4 length=38 units=m 
+
+new line.linha428 phases=3 bus1=426 bus2=431 linecode=arranjo4 length=1 units=m
+
+new line.linha429 phases=3 bus1=426 bus2=430 linecode=arranjo1 length=31 units=m 
+
+//new line.linha430 phases=3 bus1=424 bus2=432 linecode=arranjo4 length=38 units=m 
+
+new line.linha431 phases=3 bus1=432 bus2=450 linecode=arranjo4 length=1 units=m
+
+new line.linha432 phases=3 bus1=450 bus2=451 linecode=arranjo1 length=31 units=m 
+
+new line.linha433 phases=3 bus1=451 bus2=452 linecode=arranjo4 length=38 units=m 
+
+new line.linha434 phases=3 bus1=451 bus2=453 linecode=arranjo4 length=38 units=m 
+
+new line.linha435 phases=3 bus1=451 bus2=454 linecode=arranjo1 length=31 units=m 
+
+new line.linha436 phases=3 bus1=432 bus2=433 linecode=arranjo4 length=38 units=m 
+
+new line.linha437 phases=3 bus1=433 bus2=434 linecode=arranjo4 length=1 units=m
+
+new line.linha438 phases=3 bus1=434 bus2=435 linecode=arranjo1 length=31 units=m 
+
+new line.linha439 phases=3 bus1=434 bus2=436 linecode=arranjo4 length=38 units=m 
+
+new line.linha440 phases=3 bus1=436 bus2=437 linecode=arranjo4 length=1 units=m
+
+new line.linha441 phases=3 bus1=436 bus2=438 linecode=arranjo1 length=31 units=m 
+
+new line.linha442 phases=3 bus1=438 bus2=439 linecode=arranjo4 length=38 units=m 
+
+//new line.linha443 phases=3 bus1=438 bus2=440 linecode=arranjo4 length=38 units=m 
+
+new line.linha444 phases=3 bus1=440 bus2=441 linecode=arranjo4 length=38 units=m 
+
+new line.linha445 phases=3 bus1=440 bus2=442 linecode=arranjo4 length=1 units=m
+
+new line.linha446 phases=3 bus1=442 bus2=443 linecode=arranjo1 length=31 units=m 
+
+new line.linha447 phases=3 bus1=442 bus2=444 linecode=arranjo4 length=38 units=m 
+
+new line.linha448 phases=3 bus1=444 bus2=445 linecode=arranjo4 length=38 units=m 
+
+new line.linha449 phases=3 bus1=444 bus2=446 linecode=arranjo1 length=31 units=m 
+
+new line.linha450 phases=3 bus1=446 bus2=447 linecode=arranjo4 length=38 units=m 
+
+new line.linha451 phases=3 bus1=446 bus2=448 linecode=arranjo4 length=1 units=m
+
+new line.linha452 phases=3 bus1=448 bus2=449 linecode=arranjo1 length=31 units=m 
+
+new line.linha453 phases=3 bus1=433 bus2=455 linecode=arranjo4 length=38 units=m 
+
+new line.linha454 phases=3 bus1=455 bus2=456 linecode=arranjo4 length=1 units=m
+
+new line.linha455 phases=3 bus1=455 bus2=457 linecode=arranjo1 length=31 units=m 
+
+new line.linha456 phases=3 bus1=457 bus2=458 linecode=arranjo4 length=38 units=m 
+
+new line.linha457 phases=3 bus1=457 bus2=459 linecode=arranjo4 length=38 units=m 
+
+new line.linha458 phases=3 bus1=459 bus2=460 linecode=arranjo1 length=31 units=m 
+
+new line.linha459 phases=3 bus1=432 bus2=461 linecode=arranjo4 length=38 units=m 
+
+new line.linha460 phases=3 bus1=461 bus2=462 linecode=arranjo4 length=1 units=m
+
+new line.linha461 phases=3 bus1=432 bus2=463 linecode=arranjo1 length=31 units=m 
+
+new line.linha462 phases=3 bus1=463 bus2=464 linecode=arranjo4 length=38 units=m 
+
+new line.linha463 phases=3 bus1=464 bus2=465 linecode=arranjo4 length=1 units=m
+
+new line.linha464 phases=3 bus1=464 bus2=466 linecode=arranjo1 length=31 units=m 
+
+new line.linha465 phases=3 bus1=466 bus2=467 linecode=arranjo4 length=38 units=m 
+
+new line.linha466 phases=3 bus1=466 bus2=468 linecode=arranjo4 length=1 units=m
+
+new line.linha467 phases=3 bus1=468 bus2=469 linecode=arranjo1 length=31 units=m 
+
+new line.linha468 phases=3 bus1=469 bus2=470 linecode=arranjo4 length=38 units=m 
+
+new line.linha469 phases=3 bus1=469 bus2=471 linecode=arranjo4 length=38 units=m 
+
+//new line.linha470 phases=3 bus1=463 bus2=472 linecode=arranjo1 length=31 units=m 
+
+new line.linha471 phases=3 bus1=472 bus2=477 linecode=arranjo4 length=38 units=m 
+
+new line.linha472 phases=3 bus1=477 bus2=475 linecode=arranjo4 length=1 units=m
+
+new line.linha473 phases=3 bus1=475 bus2=476 linecode=arranjo1 length=31 units=m 
+
+new line.linha474 phases=3 bus1=475 bus2=474 linecode=arranjo4 length=38 units=m 
+
+new line.linha475 phases=3 bus1=474 bus2=473 linecode=arranjo4 length=1 units=m
+
+new line.linha476 phases=3 bus1=473 bus2=484 linecode=arranjo1 length=31 units=m 
+
+new line.linha477 phases=3 bus1=474 bus2=478 linecode=arranjo4 length=38 units=m 
+
+new line.linha478 phases=3 bus1=478 bus2=479 linecode=arranjo4 length=38 units=m 
+
+new line.linha479 phases=3 bus1=478 bus2=480 linecode=arranjo4 length=38 units=m 
+
+new line.linha480 phases=3 bus1=480 bus2=481 linecode=arranjo1 length=31 units=m 
+
+new line.linha481 phases=3 bus1=481 bus2=482 linecode=arranjo4 length=38 units=m 
+
+new line.linha482 phases=3 bus1=481 bus2=483 linecode=arranjo4 length=38 units=m 
+
+
+new line.linha5020 phases=3 bus1=502 bus2=5020 linecode=arranjo1 length=31 units=m
+
+//Trafo 30 delta estrela aterrada saindo o neutro PARA 501
+new transformer.Trafo502503 xhl=3.5 windings=2 %loadloss=1.1267 %noloadloss=0.28 %imag=0.5 
+~ wdg=1 bus=5020 kv=13.8 kva=300 conn=delta 
+~ wdg=2 bus=5021 kv=0.38 kva=300 conn=wye 
+
+
+new line.linha50400 phases=3 bus1=502 bus2=50400 linecode=arranjo6 length=31 units=m 
+
+//Trafo 30 delta estrela aterrada saindo o neutro PARA 
+new transformer.Traf50400 xhl=3.5 windings=2 %loadloss=1.1267 %noloadloss=0.28 %imag=0.5 
+~ wdg=1 bus=50400 kv=13.8 kva=300 conn=delta 
+~ wdg=2 bus=50401 kv=0.38 kva=300 conn=wye 
+
+
+new line.linha53200 phases=3 bus1=502 bus2=53200 linecode=arranjo6 length=31 units=m 
+
+//Trafo 30 delta estrela aterrada saindo o neutro PARA 
+new transformer.Trafo53200 xhl=3.5 windings=2 %loadloss=1.1267 %noloadloss=0.28 %imag=0.5 
+~ wdg=1 bus=53200 kv=13.8 kva=300 conn=delta 
+~ wdg=2 bus=53201 kv=0.38 kva=300 conn=wye 
+
+new line.linha54000 phases=3 bus1=502 bus2=54000 linecode=arranjo6 length=31 units=m 
+
+//Trafo 30 delta estrela aterrada saindo o neutro PARA 
+new transformer.Trafo54000 xhl=3.5 windings=2 %loadloss=1.1267 %noloadloss=0.28 %imag=0.5 
+~ wdg=1 bus=54000 kv=13.8 kva=300 conn=delta 
+~ wdg=2 bus=54001 kv=0.38 kva=300 conn=wye 
+
+
+new line.linha55900 phases=3 bus1=502 bus2=55900 linecode=arranjo6 length=31 units=m 
+
+//Trafo 30 delta estrela aterrada saindo o neutro PARA 
+new transformer.Trafo55900 xhl=3.5 windings=2 %loadloss=1.1267 %noloadloss=0.28 %imag=0.5 
+~ wdg=1 bus=55900 kv=13.8 kva=300 conn=delta 
+~ wdg=2 bus=55901 kv=0.38 kva=300 conn=wye 
+
+
+new line.linha56600 phases=3 bus1=502 bus2=56600 linecode=arranjo6 length=31 units=m 
+
+//Trafo 30 delta estrela aterrada saindo o neutro PARA 
+new transformer.Trafo56600 xhl=3.5 windings=2 %loadloss=1.1267 %noloadloss=0.28 %imag=0.5 
+~ wdg=1 bus=56600 kv=13.8 kva=300 conn=delta 
+~ wdg=2 bus=56601 kv=0.38 kva=300 conn=wye 
+
+
+new line.linha57500 phases=3 bus1=502 bus2=57500 linecode=arranjo6 length=31 units=m 
+
+//Trafo 30 delta estrela aterrada saindo o neutro PARA 
+new transformer.Trafo57500 xhl=3.5 windings=2 %loadloss=1.1267 %noloadloss=0.28 %imag=0.5 
+~ wdg=1 bus=57500 kv=13.8 kva=300 conn=delta 
+~ wdg=2 bus=57501 kv=0.38 kva=300 conn=wye 
+
+
+new line.linha51400 phases=3 bus1=502 bus2=51400 linecode=arranjo6 length=31 units=m 
+
+//Trafo 30 delta estrela aterrada saindo o neutro PARA 
+new transformer.Trafo51400 xhl=3.5 windings=2 %loadloss=1.1267 %noloadloss=0.28 %imag=0.5 
+~ wdg=1 bus=51400 kv=13.8 kva=300 conn=delta 
+~ wdg=2 bus=51401 kv=0.38 kva=300 conn=wye 
+
+
+new line.linha58100 phases=3 bus1=502 bus2=58100 linecode=arranjo6 length=31 units=m 
+
+//Trafo 30 delta estrela aterrada saindo o neutro PARA 
+new transformer.Trafo58100 xhl=3.5 windings=2 %loadloss=1.1267 %noloadloss=0.28 %imag=0.5 
+~ wdg=1 bus=58100 kv=13.8 kva=300 conn=delta 
+~ wdg=2 bus=58101 kv=0.38 kva=300 conn=wye 
+
+
+new line.linha60700 phases=3 bus1=502 bus2=60700 linecode=arranjo6 length=31 units=m 
+
+//Trafo 30 delta estrela aterrada saindo o neutro PARA 
+new transformer.Trafo60000 xhl=3.5 windings=2 %loadloss=1.1267 %noloadloss=0.28 %imag=0.5 
+~ wdg=1 bus=60700 kv=13.8 kva=300 conn=delta 
+~ wdg=2 bus=60701 kv=0.38 kva=300 conn=wye 
+
+
+new line.linha50403 phases=3 bus1=50401 bus2=504 linecode=arranjo1 length=31 units=m 
+
+new line.linha53203 phases=3 bus1=53201 bus2=532 linecode=arranjo1 length=31 units=m 
+
+new line.linha55903 phases=3 bus1=55901 bus2=559 linecode=arranjo1 length=31 units=m 
+
+new line.linha54003 phases=3 bus1=54001 bus2=540 linecode=arranjo1 length=31 units=m 
+
+new line.linha56603 phases=3 bus1=56601 bus2=566 linecode=arranjo1 length=31 units=m 
+
+new line.linha57503 phases=3 bus1=57501 bus2=575 linecode=arranjo1 length=31 units=m
+
+new line.linha51403 phases=3 bus1=51401 bus2=514 linecode=arranjo1 length=31 units=m
+
+new line.linha58103 phases=3 bus1=58101 bus2=581 linecode=arranjo1 length=31 units=m
+
+new line.linha60703 phases=3 bus1=60701 bus2=607 linecode=arranjo1 length=31 units=m
+
+
+new line.linha502 phases=3 bus1=5021 bus2=503 linecode=arranjo1 length=31 units=m 
+
+//new line.linha503 phases=3 bus1=503 bus2=504 linecode=arranjo4 length=38 units=m 
+
+new line.linha504 phases=3 bus1=504 bus2=505 linecode=arranjo4 length=1 units=m
+
+new line.linha505 phases=3 bus1=505 bus2=506 linecode=arranjo1 length=31 units=m 
+
+new line.linha506 phases=3 bus1=506 bus2=507 linecode=arranjo4 length=38 units=m 
+
+new line.linha507 phases=3 bus1=507 bus2=508 linecode=arranjo4 length=1 units=m
+
+new line.linha508 phases=3 bus1=508 bus2=509 linecode=arranjo1 length=31 units=m 
+
+new line.linha509 phases=3 bus1=506 bus2=510 linecode=arranjo4 length=38 units=m 
+
+new line.linha510 phases=3 bus1=510 bus2=511 linecode=arranjo4 length=1 units=m
+
+new line.linha511 phases=3 bus1=511 bus2=512 linecode=arranjo1 length=31 units=m 
+
+new line.linha512 phases=3 bus1=512 bus2=513 linecode=arranjo4 length=38 units=m 
+
+//new line.linha513 phases=3 bus1=512 bus2=514 linecode=arranjo4 length=38 units=m 
+
+new line.linha514 phases=3 bus1=514 bus2=515 linecode=arranjo1 length=31 units=m 
+
+new line.linha515 phases=3 bus1=514 bus2=516 linecode=arranjo4 length=38 units=m 
+
+new line.linha516 phases=3 bus1=516 bus2=517 linecode=arranjo4 length=1 units=m
+
+new line.linha517 phases=3 bus1=516 bus2=518 linecode=arranjo1 length=31 units=m 
+
+new line.linha518 phases=3 bus1=518 bus2=519 linecode=arranjo4 length=38 units=m 
+
+new line.linha519 phases=3 bus1=518 bus2=520 linecode=arranjo4 length=1 units=m
+
+new line.linha520 phases=3 bus1=520 bus2=521 linecode=arranjo1 length=31 units=m 
+
+new line.linha521 phases=3 bus1=520 bus2=522 linecode=arranjo4 length=38 units=m 
+
+new line.linha522 phases=3 bus1=522 bus2=523 linecode=arranjo4 length=38 units=m 
+
+new line.linha523 phases=3 bus1=522 bus2=524 linecode=arranjo1 length=31 units=m 
+
+new line.linha524 phases=3 bus1=524 bus2=525 linecode=arranjo4 length=38 units=m 
+
+new line.linha525 phases=3 bus1=525 bus2=526 linecode=arranjo4 length=1 units=m
+
+new line.linha526 phases=3 bus1=525 bus2=527 linecode=arranjo1 length=31 units=m 
+
+new line.linha527 phases=3 bus1=527 bus2=528 linecode=arranjo4 length=38 units=m 
+
+new line.linha528 phases=3 bus1=527 bus2=529 linecode=arranjo4 length=1 units=m
+
+new line.linha529 phases=3 bus1=529 bus2=530 linecode=arranjo1 length=31 units=m 
+
+new line.linha530 phases=3 bus1=529 bus2=531 linecode=arranjo4 length=38 units=m 
+
+//new line.linha531 phases=3 bus1=506 bus2=532 linecode=arranjo4 length=1 units=m
+
+new line.linha532 phases=3 bus1=510 bus2=533 linecode=arranjo1 length=31 units=m 
+
+new line.linha533 phases=3 bus1=510 bus2=534 linecode=arranjo4 length=38 units=m 
+
+new line.linha534 phases=3 bus1=534 bus2=535 linecode=arranjo4 length=38 units=m 
+
+new line.linha535 phases=3 bus1=534 bus2=536 linecode=arranjo1 length=31 units=m 
+
+new line.linha536 phases=3 bus1=536 bus2=537 linecode=arranjo4 length=38 units=m 
+
+new line.linha537 phases=3 bus1=536 bus2=538 linecode=arranjo4 length=1 units=m
+
+new line.linha538 phases=3 bus1=538 bus2=539 linecode=arranjo1 length=31 units=m 
+
+//new line.linha539 phases=3 bus1=538 bus2=540 linecode=arranjo4 length=38 units=m 
+
+new line.linha540 phases=3 bus1=540 bus2=541 linecode=arranjo4 length=1 units=m
+
+new line.linha541 phases=3 bus1=540 bus2=542 linecode=arranjo1 length=31 units=m 
+
+new line.linha542 phases=3 bus1=542 bus2=543 linecode=arranjo4 length=38 units=m 
+
+new line.linha543 phases=3 bus1=542 bus2=544 linecode=arranjo4 length=38 units=m 
+
+new line.linha544 phases=3 bus1=544 bus2=546 linecode=arranjo4 length=38 units=m 
+
+new line.linha545 phases=3 bus1=544 bus2=547 linecode=arranjo4 length=1 units=m
+
+new line.linha546 phases=3 bus1=547 bus2=548 linecode=arranjo1 length=31 units=m 
+
+new line.linha547 phases=3 bus1=547 bus2=549 linecode=arranjo4 length=38 units=m 
+
+new line.linha548 phases=3 bus1=549 bus2=550 linecode=arranjo4 length=38 units=m 
+
+new line.linha549 phases=3 bus1=549 bus2=551 linecode=arranjo1 length=31 units=m 
+
+new line.linha550 phases=3 bus1=551 bus2=552 linecode=arranjo4 length=38 units=m 
+
+new line.linha551 phases=3 bus1=552 bus2=553 linecode=arranjo4 length=1 units=m
+
+new line.linha552 phases=3 bus1=551 bus2=554 linecode=arranjo1 length=31 units=m 
+
+new line.linha553 phases=3 bus1=554 bus2=555 linecode=arranjo4 length=38 units=m 
+
+new line.linha554 phases=3 bus1=555 bus2=558 linecode=arranjo4 length=1 units=m
+
+new line.linha555 phases=3 bus1=555 bus2=615 linecode=arranjo1 length=31 units=m 
+
+new line.linha556 phases=3 bus1=554 bus2=556 linecode=arranjo4 length=38 units=m 
+
+new line.linha557 phases=3 bus1=556 bus2=557 linecode=arranjo4 length=38 units=m 
+
+//new line.linha558 phases=3 bus1=504 bus2=559 linecode=arranjo1 length=31 units=m 
+
+new line.linha559 phases=3 bus1=559 bus2=560 linecode=arranjo4 length=38 units=m 
+
+new line.linha560 phases=3 bus1=560 bus2=561 linecode=arranjo4 length=1 units=m
+
+new line.linha561 phases=3 bus1=561 bus2=562 linecode=arranjo1 length=31 units=m 
+
+new line.linha562 phases=3 bus1=560 bus2=563 linecode=arranjo4 length=38 units=m 
+
+new line.linha563 phases=3 bus1=563 bus2=564 linecode=arranjo4 length=1 units=m
+
+new line.linha564 phases=3 bus1=564 bus2=565 linecode=arranjo1 length=31 units=m 
+
+//new line.linha565 phases=3 bus1=563 bus2=566 linecode=arranjo4 length=38 units=m 
+
+new line.linha566 phases=3 bus1=566 bus2=567 linecode=arranjo4 length=1 units=m
+
+new line.linha567 phases=3 bus1=566 bus2=568 linecode=arranjo1 length=31 units=m 
+
+new line.linha568 phases=3 bus1=566 bus2=569 linecode=arranjo4 length=38 units=m 
+
+new line.linha569 phases=3 bus1=569 bus2=570 linecode=arranjo4 length=38 units=m 
+
+new line.linha570 phases=3 bus1=570 bus2=571 linecode=arranjo1 length=31 units=m 
+
+new line.linha571 phases=3 bus1=569 bus2=572 linecode=arranjo4 length=38 units=m 
+
+new line.linha572 phases=3 bus1=572 bus2=573 linecode=arranjo4 length=1 units=m
+
+new line.linha573 phases=3 bus1=573 bus2=574 linecode=arranjo1 length=31 units=m 
+
+//new line.linha574 phases=3 bus1=572 bus2=575 linecode=arranjo4 length=38 units=m 
+
+new line.linha575 phases=3 bus1=575 bus2=576 linecode=arranjo4 length=1 units=m
+
+new line.linha576 phases=3 bus1=576 bus2=577 linecode=arranjo1 length=31 units=m 
+
+new line.linha577 phases=3 bus1=575 bus2=578 linecode=arranjo4 length=38 units=m 
+
+new line.linha578 phases=3 bus1=579 bus2=580 linecode=arranjo4 length=38 units=m 
+
+new line.linha579 phases=3 bus1=578 bus2=579 linecode=arranjo4 length=38 units=m 
+
+new line.linha580 phases=3 bus1=579 bus2=580 linecode=arranjo1 length=31 units=m 
+
+//new line.linha581 phases=3 bus1=578 bus2=581 linecode=arranjo4 length=38 units=m 
+
+new line.linha582 phases=3 bus1=581 bus2=582 linecode=arranjo4 length=38 units=m 
+
+new line.linha583 phases=3 bus1=581 bus2=583 linecode=arranjo1 length=31 units=m 
+
+new line.linha584 phases=3 bus1=583 bus2=584 linecode=arranjo4 length=38 units=m 
+
+new line.linha585 phases=3 bus1=581 bus2=585 linecode=arranjo1 length=31 units=m 
+
+new line.linha586 phases=3 bus1=585 bus2=586 linecode=arranjo4 length=38 units=m 
+
+new line.linha587 phases=3 bus1=585 bus2=587 linecode=arranjo4 length=1 units=m
+
+new line.linha588 phases=3 bus1=587 bus2=588 linecode=arranjo1 length=31 units=m 
+
+new line.linha589 phases=3 bus1=585 bus2=589 linecode=arranjo4 length=38 units=m 
+
+new line.linha590 phases=3 bus1=589 bus2=590 linecode=arranjo4 length=1 units=m
+
+new line.linha591 phases=3 bus1=589 bus2=591 linecode=arranjo4 length=38 units=m 
+
+new line.linha592 phases=3 bus1=589 bus2=592 linecode=arranjo4 length=1 units=m
+
+new line.linha593 phases=3 bus1=592 bus2=593 linecode=arranjo1 length=31 units=m 
+
+new line.linha594 phases=3 bus1=592 bus2=594 linecode=arranjo4 length=38 units=m 
+
+new line.linha595 phases=3 bus1=594 bus2=595 linecode=arranjo4 length=1 units=m
+
+new line.linha596 phases=3 bus1=592 bus2=596 linecode=arranjo1 length=31 units=m 
+
+new line.linha597 phases=3 bus1=596 bus2=597 linecode=arranjo4 length=38 units=m 
+
+new line.linha598 phases=3 bus1=596 bus2=598 linecode=arranjo1 length=31 units=m 
+
+new line.linha599 phases=3 bus1=598 bus2=599 linecode=arranjo4 length=38 units=m 
+
+new line.linha600 phases=3 bus1=599 bus2=600 linecode=arranjo4 length=38 units=m 
+
+new line.linha601 phases=3 bus1=598 bus2=601 linecode=arranjo1 length=31 units=m 
+
+new line.linha602 phases=3 bus1=601 bus2=602 linecode=arranjo4 length=38 units=m 
+
+new line.linha603 phases=3 bus1=596 bus2=603 linecode=arranjo1 length=31 units=m 
+
+new line.linha604 phases=3 bus1=603 bus2=604 linecode=arranjo4 length=38 units=m 
+
+new line.linha605 phases=3 bus1=603 bus2=605 linecode=arranjo4 length=1 units=m
+
+new line.linha606 phases=3 bus1=605 bus2=606 linecode=arranjo1 length=31 units=m 
+
+//new line.linha607 phases=3 bus1=603 bus2=607 linecode=arranjo4 length=38 units=m 
+
+new line.linha608 phases=3 bus1=607 bus2=608 linecode=arranjo4 length=1 units=m
+
+new line.linha609 phases=3 bus1=607 bus2=609 linecode=arranjo4 length=38 units=m 
+
+new line.linha610 phases=3 bus1=609 bus2=610 linecode=arranjo4 length=1 units=m
+
+new line.linha611 phases=3 bus1=607 bus2=611 linecode=arranjo1 length=31 units=m 
+
+new line.linha612 phases=3 bus1=611 bus2=612 linecode=arranjo4 length=38 units=m 
+
+new line.linha613 phases=3 bus1=611 bus2=613 linecode=arranjo4 length=1 units=m
+
+new line.linha614 phases=3 bus1=613 bus2=614 linecode=arranjo1 length=31 units=m 
+
+
+
+//100% das barras: 
+//Curva de carga comercial 
+
+New Loadshape.CurvadecargaA npts=24 interval=1 
+ 
+~ mult=( 0.2251 0.2235 0.2195 0.2163 0.2249 0.2701 0.3759 0.6768 0.8599 0.9376 1 0.8093 0.8186 0.9581 0.9550 0.9103 0.7934 0.4591 0.4168 0.4454 0.3128 0.2876 0.2494 0.2355 ) 
+
+
+// Curva de carga residencial e escritório
+
+// Quarto VE 12 kW - 5h Escritório
+New Loadshape.Curvadecarga1 npts=24 interval=1 
+~ mult=( 0.1251 0.1235 0.1195 0.1163 0.1249 0.1701 0.2759 0.6768 0.8599 0.9376 1.15 1.23 1.12 1.19 1.03 0.7934 0.4591 0.3168 0.2454 0.2128 0.1876 0.1494 0.1355  0.1015)
+
+// Quarto VE 7 kW - 8h - residencial
+New Loadshape.Curvadecarga2 npts=24 interval=1 
+~ mult=( 1  0.4235 0.4195 0.5163 0.5249 0.1701 0.2759 0.2768 0.2599 0.2376 0.21 0.2093 0.3186 0.3093 0.2186 0.38 0.48 1 1 1 1 1 1 1)
+
+// Quarto VE 7 kW - 9h residencial
+New Loadshape.Curvadecarga3 npts=24 interval=1 
+~ mult=( 1 1 0.4195 0.5163 0.5249 0.1701 0.2759 0.2768 0.2599 0.21 0.2093 0.3186 0.3093 0.2186 0.38 0.48 1 1 1 1 1 1 1)
+
+// Quarto VE 7 kW - 7h - Escritório
+New Loadshape.Curvadecarga4 npts=24 interval=1 
+~ mult=( 0.1251 0.1235 0.1195 0.1163 0.1249 0.1701 0.2759 0.6768 0.8599 0.9376 1 1 1 1 1 1 1 0.7934 0.4591 0.3168 0.2454 0.2128 0.1876 0.1494 )
+
+// Quarto VE 7 kW - 10h residencial
+New Loadshape.Curvadecarga5 npts=24 interval=1 
+~ mult=( 1 1 1 0.403  0.5163 0.5249 0.1701 0.2759 0.2768 0.2599 0.21 0.2093 0.3186 0.3093 0.2186 0.38 0.48  1 1 1 1 1 1 1)
+
+// Quarto VE 12 kW - 5h- residencial
+New Loadshape.Curvadecarga6 npts=24 interval=1 
+~ mult=(  0.4235 0.4235 0.4195 0.5163 0.5249 0.1701 0.2759 0.2768 0.2599 0.2376 0.21 0.2093 0.3186 0.3093 0.2186 0.38 0.48 0.7 0.8 1 1 1 1 1)
+
+// Quarto VE 7 kW - 8h - Escritório
+New Loadshape.Curvadecarga7 npts=24 interval=1 
+~ mult=( 0.1251 0.1235 0.1195 0.1163 0.1249 0.1701 0.2759 0.6768 0.8599 1 1 1 1 1 1 1 1 0.7934 0.4591 0.3168 0.2454 0.2128 0.1876 0.1494)
+
+// Quarto VE 12 kW - 4h Escritório
+New Loadshape.Curvadecarga8 npts=24 interval=1 
+~ mult=( 0.1251 0.1235 0.1195 0.1163 0.1249 0.1701 0.2759 0.6768 0.8599 0.9 1 1 1 1 0.7934 0.4591 0.3168 0.2454 0.2128 0.1876 0.1494 0.1355  0.1015 0.1015)
+
+
+new load.carga2 phases=3 model=1 bus=3 kV=0.38 kw= 2.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga3 phases=3 model=1 bus=4 kV=0.38 kw=10 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga4 phases=3 model=1 bus=5 kV=0.38 kw=3 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga5 phases=3 model=1 bus=6 kV=0.38 kw= 12.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga6 phases=3 model=1 bus=7 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga7 phases=3 model=1 bus=8 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga8 phases=3 model=1 bus=9 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga9 phases=3 model=1 bus=10 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga10 phases=3 model=1 bus=11 kV=0.38 kw=13 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga11 phases=3 model=1 bus=12 kV=0.38 kw= 2.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga12 phases=3 model=1 bus=13 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga13 phases=3 model=1 bus=14 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga14 phases=3 model=1 bus=15 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga15 phases=3 model=1 bus=16 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga16 phases=3 model=1 bus=17 kV=0.38 kw=7 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga17 phases=3 model=1 bus=18 kV=0.38 kw=7 conn=wye pf=0.92 daily=Curvadecarga5 
+new load.carga18 phases=3 model=1 bus=19 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga19 phases=3 model=1 bus=20 kV=0.38 kw= 2.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga20 phases=3 model=1 bus=21 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga21 phases=3 model=1 bus=22 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga22 phases=3 model=1 bus=23 kV=0.38 kw= 7 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga23 phases=3 model=1 bus=24 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga24 phases=3 model=1 bus=25 kV=0.38 kw=7 conn=wye pf=0.92 daily=Curvadecarga3 
+new load.carga25 phases=3 model=1 bus=26 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga26 phases=3 model=1 bus=27 kV=0.38 kw=3 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga27 phases=3 model=1 bus=28 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga28 phases=3 model=1 bus=29 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga29 phases=3 model=1 bus=30 kV=0.38 kw=12 conn=wye pf=0.92 daily=Curvadecarga6 
+new load.carga30 phases=3 model=1 bus=31 kV=0.38 kw= 12 conn=wye pf=0.92 daily=CurvadecargaA
+new load.carga31 phases=3 model=1 bus=32 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga32 phases=3 model=1 bus=33 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga33 phases=3 model=1 bus=34 kV=0.38 kw= 2.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga34 phases=3 model=1 bus=35 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga35 phases=3 model=1 bus=36 kV=0.38 kw=3 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga36 phases=3 model=1 bus=37 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga37 phases=3 model=1 bus=38 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga38 phases=3 model=1 bus=39 kV=0.38 kw= 7 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga39 phases=3 model=1 bus=40 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga40 phases=3 model=1 bus=41 kV=0.38 kw=7 conn=wye pf=0.92 daily=Curvadecarga4 
+new load.carga41 phases=3 model=1 bus=42 kV=0.38 kw= 2.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga42 phases=3 model=1 bus=43 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga43 phases=3 model=1 bus=44 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga44 phases=3 model=1 bus=45 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga45 phases=3 model=1 bus=46 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga46 phases=3 model=1 bus=47 kV=0.38 kw= 2.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga47 phases=3 model=1 bus=48 kV=0.38 kw=7 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga48 phases=3 model=1 bus=49 kV=0.38 kw=7 conn=wye pf=0.92 daily=Curvadecarga2 
+new load.carga49 phases=3 model=1 bus=50 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga50 phases=3 model=1 bus=51 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga51 phases=3 model=1 bus=52 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga52 phases=3 model=1 bus=53 kV=0.38 kw= 12 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga53 phases=3 model=1 bus=54 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga54 phases=3 model=1 bus=55 kV=0.38 kw=12 conn=wye pf=0.92 daily=Curvadecarga8 
+new load.carga55 phases=3 model=1 bus=56 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga56 phases=3 model=1 bus=57 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga57 phases=3 model=1 bus=58 kV=0.38 kw= 2.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga58 phases=3 model=1 bus=59 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga59 phases=3 model=1 bus=60 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga60 phases=3 model=1 bus=61 kV=0.38 kw= 2.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga61 phases=3 model=1 bus=62 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga62 phases=3 model=1 bus=63 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga63 phases=3 model=1 bus=64 kV=0.38 kw= 2.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga64 phases=3 model=1 bus=65 kV=0.38 kw=7 conn=wye pf=0.92 daily=CurvadecargaA
+new load.carga65 phases=3 model=1 bus=66 kV=0.38 kw=7 conn=wye pf=0.92 daily=Curvadecarga2 
+new load.carga66 phases=3 model=1 bus=67 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga67 phases=3 model=1 bus=68 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga68 phases=3 model=1 bus=69 kV=0.38 kw= 7 conn=wye pf=0.92 daily=CurvadecargaA
+new load.carga69 phases=3 model=1 bus=70 kV=0.38 kw=7 conn=wye pf=0.92 daily=Curvadecarga7 
+new load.carga70 phases=3 model=1 bus=71 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga71 phases=3 model=1 bus=72 kV=0.38 kw= 2.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga72 phases=3 model=1 bus=73 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga73 phases=3 model=1 bus=74 kV=0.38 kw= 2.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga74 phases=3 model=1 bus=75 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga75 phases=3 model=1 bus=76 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga76 phases=3 model=1 bus=77 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga77 phases=3 model=1 bus=78 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga78 phases=3 model=1 bus=79 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga79 phases=3 model=1 bus=80 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga80 phases=3 model=1 bus=81 kV=0.38 kw= 12 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga81 phases=3 model=1 bus=82 kV=0.38 kw=12 conn=wye pf=0.92 daily=Curvadecarga1 
+new load.carga82 phases=3 model=1 bus=83 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga83 phases=3 model=1 bus=84 kV=0.38 kw= 2.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga84 phases=3 model=1 bus=85 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga85 phases=3 model=1 bus=86 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga86 phases=3 model=1 bus=87 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga87 phases=3 model=1 bus=88 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga88 phases=3 model=1 bus=89 kV=0.38 kw= 7 conn=wye pf=0.92 daily=CurvadecargaA
+new load.carga89 phases=3 model=1 bus=90 kV=0.38 kw=7 conn=wye pf=0.92 daily=Curvadecarga5 
+new load.carga90 phases=3 model=1 bus=91 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga91 phases=3 model=1 bus=92 kV=0.38 kw= 12.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga92 phases=3 model=1 bus=93 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga93 phases=3 model=1 bus=94 kV=0.38 kw= 2.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga94 phases=3 model=1 bus=95 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga95 phases=3 model=1 bus=96 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga96 phases=3 model=1 bus=97 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+
+
+new load.carga101 phases=3 model=1 bus=102 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga102 phases=3 model=1 bus=103 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga103 phases=3 model=1 bus=104 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga104 phases=3 model=1 bus=105 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga105 phases=3 model=1 bus=106 kV=0.38 kw= 7 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga106 phases=3 model=1 bus=107 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga107 phases=3 model=1 bus=108 kV=0.38 kw=7 conn=wye pf=0.92 daily=Curvadecarga4 
+new load.carga108 phases=3 model=1 bus=109 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga109 phases=3 model=1 bus=110 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga110 phases=3 model=1 bus=111 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga111 phases=3 model=1 bus=112 kV=0.38 kw= 12 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga112 phases=3 model=1 bus=113 kV=0.38 kw=12 conn=wye pf=0.92 daily=Curvadecarga8 
+new load.carga113 phases=3 model=1 bus=114 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga114 phases=3 model=1 bus=115 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga115 phases=3 model=1 bus=116 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga116 phases=3 model=1 bus=117 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga117 phases=3 model=1 bus=118 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga118 phases=3 model=1 bus=119 kV=0.38 kw=3 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga119 phases=3 model=1 bus=120 kV=0.38 kw= 7 conn=wye pf=0.92 daily=CurvadecargaA
+new load.carga120 phases=3 model=1 bus=121 kV=0.38 kw=7 conn=wye pf=0.92 daily=Curvadecarga3 
+new load.carga121 phases=3 model=1 bus=122 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga122 phases=3 model=1 bus=123 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga123 phases=3 model=1 bus=124 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga124 phases=3 model=1 bus=125 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga125 phases=3 model=1 bus=126 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga126 phases=3 model=1 bus=127 kV=0.38 kw=3 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga127 phases=3 model=1 bus=128 kV=0.38 kw= 2.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga128 phases=3 model=1 bus=129 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga129 phases=3 model=1 bus=130 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga130 phases=3 model=1 bus=131 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga131 phases=3 model=1 bus=132 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga132 phases=3 model=1 bus=133 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga133 phases=3 model=1 bus=134 kV=0.38 kw= 7 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga134 phases=3 model=1 bus=135 kV=0.38 kw=7 conn=wye pf=0.92 daily=Curvadecarga7 
+new load.carga135 phases=3 model=1 bus=136 kV=0.38 kw=3 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga136 phases=3 model=1 bus=137 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga137 phases=3 model=1 bus=138 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga138 phases=3 model=1 bus=139 kV=0.38 kw= 2.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga139 phases=3 model=1 bus=140 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga140 phases=3 model=1 bus=141 kV=0.38 kw=12 conn=wye pf=0.92 daily=Curvadecarga6 
+new load.carga141 phases=3 model=1 bus=142 kV=0.38 kw= 12 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga142 phases=3 model=1 bus=143 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga143 phases=3 model=1 bus=144 kV=0.38 kw= 2.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga144 phases=3 model=1 bus=145 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga145 phases=3 model=1 bus=146 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga146 phases=3 model=1 bus=147 kV=0.38 kw= 3.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga147 phases=3 model=1 bus=148 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga148 phases=3 model=1 bus=149 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga149 phases=3 model=1 bus=150 kV=0.38 kw= 7 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga150 phases=3 model=1 bus=151 kV=0.38 kw=7 conn=wye pf=0.92 daily=Curvadecarga5 
+new load.carga151 phases=3 model=1 bus=152 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga152 phases=3 model=1 bus=153 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga153 phases=3 model=1 bus=154 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga154 phases=3 model=1 bus=155 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga155 phases=3 model=1 bus=156 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga156 phases=3 model=1 bus=157 kV=0.38 kw=3 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga157 phases=3 model=1 bus=158 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga158 phases=3 model=1 bus=159 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga159 phases=3 model=1 bus=160 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga160 phases=3 model=1 bus=161 kV=0.38 kw= 7 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga161 phases=3 model=1 bus=162 kV=0.38 kw=7 conn=wye pf=0.92 daily=Curvadecarga2 
+new load.carga162 phases=3 model=1 bus=163 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga163 phases=3 model=1 bus=164 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga164 phases=3 model=1 bus=165 kV=0.38 kw=12 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga165 phases=3 model=1 bus=166 kV=0.38 kw=12 conn=wye pf=0.92 daily=Curvadecarga1 
+new load.carga166 phases=3 model=1 bus=167 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga167 phases=3 model=1 bus=168 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga168 phases=3 model=1 bus=169 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga169 phases=3 model=1 bus=170 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga170 phases=3 model=1 bus=171 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga171 phases=3 model=1 bus=172 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga172 phases=3 model=1 bus=173 kV=0.38 kw=7 conn=wye pf=0.92 daily=Curvadecarga2 
+new load.carga173 phases=3 model=1 bus=174 kV=0.38 kw= 7 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga174 phases=3 model=1 bus=175 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga175 phases=3 model=1 bus=176 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga176 phases=3 model=1 bus=177 kV=0.38 kw=7 conn=wye pf=0.92 daily=Curvadecarga5 
+new load.carga177 phases=3 model=1 bus=178 kV=0.38 kw= 7 conn=wye pf=0.92 daily=CurvadecargaA 
+
+
+
+new load.carga201 phases=3 model=1 bus=202 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga202 phases=3 model=1 bus=203 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga203 phases=3 model=1 bus=204 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga204 phases=3 model=1 bus=205 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga205 phases=3 model=1 bus=206 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga206 phases=3 model=1 bus=207 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga207 phases=3 model=1 bus=208 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga208 phases=3 model=1 bus=209 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga209 phases=3 model=1 bus=210 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga210 phases=3 model=1 bus=211 kV=0.38 kw=3 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga211 phases=3 model=1 bus=212 kV=0.38 kw= 7 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga212 phases=3 model=1 bus=213 kV=0.38 kw=7 conn=wye pf=0.92 daily=Curvadecarga2 
+new load.carga213 phases=3 model=1 bus=214 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga214 phases=3 model=1 bus=215 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga215 phases=3 model=1 bus=216 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga216 phases=3 model=1 bus=217 kV=0.38 kw= 2.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga217 phases=3 model=1 bus=218 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga218 phases=3 model=1 bus=219 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga219 phases=3 model=1 bus=220 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga220 phases=3 model=1 bus=221 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga221 phases=3 model=1 bus=222 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga222 phases=3 model=1 bus=223 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga223 phases=3 model=1 bus=224 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga224 phases=3 model=1 bus=225 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga225 phases=3 model=1 bus=226 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga226 phases=3 model=1 bus=227 kV=0.38 kw=7 conn=wye pf=0.92 daily=CurvadecargaA
+new load.carga227 phases=3 model=1 bus=228 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga228 phases=3 model=1 bus=229 kV=0.38 kw=7 conn=wye pf=0.92 daily=Curvadecarga7 
+new load.carga229 phases=3 model=1 bus=230 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga230 phases=3 model=1 bus=231 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga231 phases=3 model=1 bus=232 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga232 phases=3 model=1 bus=233 kV=0.38 kw=3 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga233 phases=3 model=1 bus=234 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga234 phases=3 model=1 bus=235 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga235 phases=3 model=1 bus=236 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga236 phases=3 model=1 bus=237 kV=0.38 kw=12 conn=wye pf=0.92 daily=Curvadecarga8 
+new load.carga237 phases=3 model=1 bus=238 kV=0.38 kw=12 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga238 phases=3 model=1 bus=239 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga239 phases=3 model=1 bus=240 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga240 phases=3 model=1 bus=241 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga241 phases=3 model=1 bus=242 kV=0.38 kw= 3.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga242 phases=3 model=1 bus=243 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga243 phases=3 model=1 bus=244 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga244 phases=3 model=1 bus=245 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga245 phases=3 model=1 bus=246 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga246 phases=3 model=1 bus=247 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga247 phases=3 model=1 bus=248 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga248 phases=3 model=1 bus=249 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga249 phases=3 model=1 bus=250 kV=0.38 kw= 3.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga250 phases=3 model=1 bus=251 kV=0.38 kw=12 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga251 phases=3 model=1 bus=252 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga252 phases=3 model=1 bus=253 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga253 phases=3 model=1 bus=254 kV=0.38 kw=12 conn=wye pf=0.92 daily=Curvadecarga1 
+new load.carga254 phases=3 model=1 bus=255 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga255 phases=3 model=1 bus=256 kV=0.38 kw=7 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga256 phases=3 model=1 bus=257 kV=0.38 kw=7 conn=wye pf=0.92 daily=Curvadecarga2 
+new load.carga257 phases=3 model=1 bus=258 kV=0.38 kw= 2.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga258 phases=3 model=1 bus=259 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga259 phases=3 model=1 bus=260 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga260 phases=3 model=1 bus=261 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga261 phases=3 model=1 bus=262 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga262 phases=3 model=1 bus=263 kV=0.38 kw=3 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga263 phases=3 model=1 bus=264 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga264 phases=3 model=1 bus=265 kV=0.38 kw=7 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga265 phases=3 model=1 bus=266 kV=0.38 kw=7 conn=wye pf=0.92 daily=Curvadecarga5 
+new load.carga266 phases=3 model=1 bus=267 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga267 phases=3 model=1 bus=268 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga268 phases=3 model=1 bus=269 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga269 phases=3 model=1 bus=270 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga270 phases=3 model=1 bus=271 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga271 phases=3 model=1 bus=272 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga272 phases=3 model=1 bus=273 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga273 phases=3 model=1 bus=274 kV=0.38 kw= 2.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga274 phases=3 model=1 bus=275 kV=0.38 kw=12 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga275 phases=3 model=1 bus=276 kV=0.38 kw=12 conn=wye pf=0.92 daily=Curvadecarga6 
+new load.carga276 phases=3 model=1 bus=277 kV=0.38 kw=3 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga277 phases=3 model=1 bus=278 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga278 phases=3 model=1 bus=279 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga279 phases=3 model=1 bus=280 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga280 phases=3 model=1 bus=281 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga281 phases=3 model=1 bus=282 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga282 phases=3 model=1 bus=283 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga283 phases=3 model=1 bus=284 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga284 phases=3 model=1 bus=285 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga285 phases=3 model=1 bus=286 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga286 phases=3 model=1 bus=287 kV=0.38 kw=7 conn=wye pf=0.92 daily=Curvadecarga5 
+new load.carga287 phases=3 model=1 bus=288 kV=0.38 kw=7 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga288 phases=3 model=1 bus=289 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga289 phases=3 model=1 bus=290 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga290 phases=3 model=1 bus=291 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga291 phases=3 model=1 bus=292 kV=0.38 kw= 3.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga292 phases=3 model=1 bus=293 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga293 phases=3 model=1 bus=294 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga294 phases=3 model=1 bus=295 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga295 phases=3 model=1 bus=296 kV=0.38 kw=7 conn=wye pf=0.92 daily=Curvadecarga2 
+new load.carga296 phases=3 model=1 bus=297 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga297 phases=3 model=1 bus=298 kV=0.38 kw=7 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga298 phases=3 model=1 bus=299 kV=0.38 kw=2.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga299 phases=3 model=1 bus=300 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga300 phases=3 model=1 bus=301 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga301 phases=3 model=1 bus=302 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga302 phases=3 model=1 bus=303 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga303 phases=3 model=1 bus=304 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga304 phases=3 model=1 bus=305 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga305 phases=3 model=1 bus=306 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga306 phases=3 model=1 bus=307 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga307 phases=3 model=1 bus=308 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga308 phases=3 model=1 bus=309 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga309 phases=3 model=1 bus=310 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga310 phases=3 model=1 bus=311 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga311 phases=3 model=1 bus=312 kV=0.38 kw= 2.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga312 phases=3 model=1 bus=313 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga313 phases=3 model=1 bus=314 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga314 phases=3 model=1 bus=315 kV=0.38 kw=7 conn=wye pf=0.92 daily=Curvadecarga4 
+new load.carga315 phases=3 model=1 bus=316 kV=0.38 kw=7 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga316 phases=3 model=1 bus=317 kV=0.38 kw= 11.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga317 phases=3 model=1 bus=318 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga318 phases=3 model=1 bus=319 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga319 phases=3 model=1 bus=320 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga320 phases=3 model=1 bus=321 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga321 phases=3 model=1 bus=322 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga322 phases=3 model=1 bus=323 kV=0.38 kw= 2.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga323 phases=3 model=1 bus=324 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga324 phases=3 model=1 bus=325 kV=0.38 kw=3 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga329 phases=3 model=1 bus=330 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga330 phases=3 model=1 bus=331 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga331 phases=3 model=1 bus=332 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga332 phases=3 model=1 bus=333 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga333 phases=3 model=1 bus=334 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga334 phases=3 model=1 bus=335 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga335 phases=3 model=1 bus=336 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga336 phases=3 model=1 bus=337 kV=0.38 kw=12 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga337 phases=3 model=1 bus=338 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga338 phases=3 model=1 bus=339 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga339 phases=3 model=1 bus=340 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga340 phases=3 model=1 bus=341 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga341 phases=3 model=1 bus=342 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga342 phases=3 model=1 bus=343 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga343 phases=3 model=1 bus=344 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga344 phases=3 model=1 bus=345 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga345 phases=3 model=1 bus=346 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga346 phases=3 model=1 bus=347 kV=0.38 kw= 2.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga347 phases=3 model=1 bus=348 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga348 phases=3 model=1 bus=349 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga349 phases=3 model=1 bus=350 kV=0.38 kw= 3.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga350 phases=3 model=1 bus=351 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga351 phases=3 model=1 bus=352 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga352 phases=3 model=1 bus=353 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga353 phases=3 model=1 bus=354 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga354 phases=3 model=1 bus=355 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga355 phases=3 model=1 bus=356 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga356 phases=3 model=1 bus=357 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga357 phases=3 model=1 bus=358 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga358 phases=3 model=1 bus=359 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga359 phases=3 model=1 bus=360 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga360 phases=3 model=1 bus=361 kV=0.38 kw= 2.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga361 phases=3 model=1 bus=362 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga362 phases=3 model=1 bus=363 kV=0.38 kw=12 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga363 phases=3 model=1 bus=364 kV=0.38 kw= 2.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga364 phases=3 model=1 bus=365 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga365 phases=3 model=1 bus=366 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga366 phases=3 model=1 bus=367 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga367 phases=3 model=1 bus=368 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga368 phases=3 model=1 bus=369 kV=0.38 kw= 2.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga369 phases=3 model=1 bus=370 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+
+
+
+new load.carga401 phases=3 model=1 bus=402 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga402 phases=3 model=1 bus=403 kV=0.38 kw= 2.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga403 phases=3 model=1 bus=404 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga404 phases=3 model=1 bus=405 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga405 phases=3 model=1 bus=406 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga406 phases=3 model=1 bus=407 kV=0.38 kw=7 conn=wye pf=0.92 daily=Curvadecarga4 
+new load.carga407 phases=3 model=1 bus=408 kV=0.38 kw=7 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga408 phases=3 model=1 bus=409 kV=0.38 kw= 11.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga409 phases=3 model=1 bus=410 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga410 phases=3 model=1 bus=411 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga411 phases=3 model=1 bus=412 kV=0.38 kw= 2.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga412 phases=3 model=1 bus=413 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga413 phases=3 model=1 bus=414 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga414 phases=3 model=1 bus=415 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga415 phases=3 model=1 bus=416 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga416 phases=3 model=1 bus=417 kV=0.38 kw= 2.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga417 phases=3 model=1 bus=418 kV=0.38 kw=7 conn=wye pf=0.92 daily=Curvadecarga2 
+new load.carga418 phases=3 model=1 bus=419 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga419 phases=3 model=1 bus=420 kV=0.38 kw= 7 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga420 phases=3 model=1 bus=421 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga421 phases=3 model=1 bus=422 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga422 phases=3 model=1 bus=423 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga423 phases=3 model=1 bus=424 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga424 phases=3 model=1 bus=425 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga425 phases=3 model=1 bus=426 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga426 phases=3 model=1 bus=427 kV=0.38 kw=7 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga427 phases=3 model=1 bus=428 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga428 phases=3 model=1 bus=429 kV=0.38 kw=7 conn=wye pf=0.92 daily=Curvadecarga7 
+new load.carga429 phases=3 model=1 bus=430 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga430 phases=3 model=1 bus=431 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga431 phases=3 model=1 bus=432 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga432 phases=3 model=1 bus=433 kV=0.38 kw=3 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga433 phases=3 model=1 bus=434 kV=0.38 kw= 12 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga434 phases=3 model=1 bus=435 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga435 phases=3 model=1 bus=436 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga436 phases=3 model=1 bus=437 kV=0.38 kw=12 conn=wye pf=0.92 daily=Curvadecarga6 
+new load.carga437 phases=3 model=1 bus=438 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga438 phases=3 model=1 bus=439 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga439 phases=3 model=1 bus=440 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga440 phases=3 model=1 bus=441 kV=0.38 kw=12 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga441 phases=3 model=1 bus=442 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga442 phases=3 model=1 bus=443 kV=0.38 kw=12 conn=wye pf=0.92 daily=Curvadecarga8 
+new load.carga443 phases=3 model=1 bus=444 kV=0.38 kw= 11.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga444 phases=3 model=1 bus=445 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga445 phases=3 model=1 bus=446 kV=0.38 kw=3 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga446 phases=3 model=1 bus=447 kV=0.38 kw= 12 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga447 phases=3 model=1 bus=448 kV=0.38 kw=12 conn=wye pf=0.92 daily=Curvadecarga1 
+new load.carga448 phases=3 model=1 bus=449 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga449 phases=3 model=1 bus=450 kV=0.38 kw= 2.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga450 phases=3 model=1 bus=451 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga451 phases=3 model=1 bus=452 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga452 phases=3 model=1 bus=453 kV=0.38 kw= 7 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga453 phases=3 model=1 bus=454 kV=0.38 kw=7 conn=wye pf=0.92 daily=Curvadecarga5 
+new load.carga454 phases=3 model=1 bus=455 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga455 phases=3 model=1 bus=456 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga456 phases=3 model=1 bus=457 kV=0.38 kw=3 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga457 phases=3 model=1 bus=458 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga458 phases=3 model=1 bus=459 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga459 phases=3 model=1 bus=460 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga460 phases=3 model=1 bus=461 kV=0.38 kw= 2.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga461 phases=3 model=1 bus=462 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga462 phases=3 model=1 bus=463 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga463 phases=3 model=1 bus=464 kV=0.38 kw= 7 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga464 phases=3 model=1 bus=465 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga465 phases=3 model=1 bus=466 kV=0.38 kw=7 conn=wye pf=0.92 daily=Curvadecarga5 
+new load.carga466 phases=3 model=1 bus=467 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga467 phases=3 model=1 bus=468 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga468 phases=3 model=1 bus=469 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga469 phases=3 model=1 bus=470 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga470 phases=3 model=1 bus=471 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga471 phases=3 model=1 bus=472 kV=0.38 kw= 7 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga472 phases=3 model=1 bus=473 kV=0.38 kw=7 conn=wye pf=0.92 daily=Curvadecarga3 
+new load.carga473 phases=3 model=1 bus=474 kV=0.38 kw= 3.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga474 phases=3 model=1 bus=475 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga475 phases=3 model=1 bus=476 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga476 phases=3 model=1 bus=477 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga477 phases=3 model=1 bus=478 kV=0.38 kw= 7 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga478 phases=3 model=1 bus=479 kV=0.38 kw=7 conn=wye pf=0.92 daily=Curvadecarga2 
+new load.carga479 phases=3 model=1 bus=480 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga480 phases=3 model=1 bus=481 kV=0.38 kw= 12.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga481 phases=3 model=1 bus=482 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga482 phases=3 model=1 bus=483 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga483 phases=3 model=1 bus=484 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+
+
+new load.carga501 phases=3 model=1 bus=502 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga502 phases=3 model=1 bus=503 kV=0.38 kw= 2.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga503 phases=3 model=1 bus=504 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga504 phases=3 model=1 bus=505 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga505 phases=3 model=1 bus=506 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga506 phases=3 model=1 bus=507 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga507 phases=3 model=1 bus=508 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga508 phases=3 model=1 bus=509 kV=0.38 kw= 11.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga509 phases=3 model=1 bus=510 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga510 phases=3 model=1 bus=511 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga511 phases=3 model=1 bus=512 kV=0.38 kw= 2.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga512 phases=3 model=1 bus=513 kV=0.38 kw=7 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga513 phases=3 model=1 bus=514 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga514 phases=3 model=1 bus=515 kV=0.38 kw=7 conn=wye pf=0.92 daily=Curvadecarga3 
+new load.carga515 phases=3 model=1 bus=516 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga516 phases=3 model=1 bus=517 kV=0.38 kw= 2.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga517 phases=3 model=1 bus=518 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga518 phases=3 model=1 bus=519 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga519 phases=3 model=1 bus=520 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga520 phases=3 model=1 bus=521 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga521 phases=3 model=1 bus=522 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga522 phases=3 model=1 bus=523 kV=0.38 kw= 12 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga523 phases=3 model=1 bus=524 kV=0.38 kw=12 conn=wye pf=0.92 daily=Curvadecarga1 
+new load.carga524 phases=3 model=1 bus=525 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga525 phases=3 model=1 bus=526 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga526 phases=3 model=1 bus=527 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga527 phases=3 model=1 bus=528 kV=0.38 kw= 7 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga528 phases=3 model=1 bus=529 kV=0.38 kw=7 conn=wye pf=0.92 daily=Curvadecarga2 
+new load.carga529 phases=3 model=1 bus=530 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga530 phases=3 model=1 bus=531 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga531 phases=3 model=1 bus=532 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga532 phases=3 model=1 bus=533 kV=0.38 kw=3 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga533 phases=3 model=1 bus=534 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga534 phases=3 model=1 bus=535 kV=0.38 kw=7 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga535 phases=3 model=1 bus=536 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga536 phases=3 model=1 bus=537 kV=0.38 kw=7 conn=wye pf=0.92 daily=Curvadecarga2 
+new load.carga537 phases=3 model=1 bus=538 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga538 phases=3 model=1 bus=539 kV=0.38 kw= 7 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga539 phases=3 model=1 bus=540 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga540 phases=3 model=1 bus=541 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga541 phases=3 model=1 bus=542 kV=0.38 kw= 7 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga542 phases=3 model=1 bus=543 kV=0.38 kw=7 conn=wye pf=0.92 daily=Curvadecarga4 
+new load.carga543 phases=3 model=1 bus=544 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga544 phases=3 model=1 bus=545 kV=0.38 kw=7 conn=wye pf=0.92 daily=Curvadecarga5 
+new load.carga545 phases=3 model=1 bus=546 kV=0.38 kw=3 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga546 phases=3 model=1 bus=547 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga547 phases=3 model=1 bus=548 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga548 phases=3 model=1 bus=549 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga549 phases=3 model=1 bus=550 kV=0.38 kw= 2.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga550 phases=3 model=1 bus=551 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga551 phases=3 model=1 bus=552 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga552 phases=3 model=1 bus=553 kV=0.38 kw= 2.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga553 phases=3 model=1 bus=554 kV=0.38 kw=12 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga554 phases=3 model=1 bus=555 kV=0.38 kw=12 conn=wye pf=0.92 daily=Curvadecarga8 
+new load.carga555 phases=3 model=1 bus=556 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga556 phases=3 model=1 bus=557 kV=0.38 kw=3 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga557 phases=3 model=1 bus=558 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga558 phases=3 model=1 bus=559 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga559 phases=3 model=1 bus=560 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga560 phases=3 model=1 bus=561 kV=0.38 kw= 2.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga561 phases=3 model=1 bus=562 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga562 phases=3 model=1 bus=563 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga563 phases=3 model=1 bus=564 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga564 phases=3 model=1 bus=565 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga565 phases=3 model=1 bus=566 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga566 phases=3 model=1 bus=567 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga567 phases=3 model=1 bus=568 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga568 phases=3 model=1 bus=569 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga569 phases=3 model=1 bus=570 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga570 phases=3 model=1 bus=571 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga571 phases=3 model=1 bus=572 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga572 phases=3 model=1 bus=573 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga573 phases=3 model=1 bus=574 kV=0.38 kw= 7 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga574 phases=3 model=1 bus=575 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga575 phases=3 model=1 bus=576 kV=0.38 kw=7 conn=wye pf=0.92 daily=Curvadecarga7 
+new load.carga576 phases=3 model=1 bus=577 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga577 phases=3 model=1 bus=578 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga578 phases=3 model=1 bus=579 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga579 phases=3 model=1 bus=580 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga580 phases=3 model=1 bus=581 kV=0.38 kw= 2.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga581 phases=3 model=1 bus=582 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga582 phases=3 model=1 bus=583 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga583 phases=3 model=1 bus=584 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga584 phases=3 model=1 bus=585 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga585 phases=3 model=1 bus=586 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga586 phases=3 model=1 bus=587 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga587 phases=3 model=1 bus=588 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga588 phases=3 model=1 bus=589 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga589 phases=3 model=1 bus=590 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga590 phases=3 model=1 bus=591 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga591 phases=3 model=1 bus=592 kV=0.38 kw= 3.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga592 phases=3 model=1 bus=593 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga593 phases=3 model=1 bus=594 kV=0.38 kw= 12 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga594 phases=3 model=1 bus=595 kV=0.38 kw=12 conn=wye pf=0.92 daily=Curvadecarga6 
+new load.carga595 phases=3 model=1 bus=596 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga596 phases=3 model=1 bus=597 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga597 phases=3 model=1 bus=598 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga598 phases=3 model=1 bus=599 kV=0.38 kw=2.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga599 phases=3 model=1 bus=600 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga600 phases=3 model=1 bus=601 kV=0.38 kw=7 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga601 phases=3 model=1 bus=602 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga602 phases=3 model=1 bus=603 kV=0.38 kw= 11.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga603 phases=3 model=1 bus=604 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga604 phases=3 model=1 bus=605 kV=0.38 kw=7 conn=wye pf=0.92 daily=Curvadecarga5 
+new load.carga605 phases=3 model=1 bus=606 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga606 phases=3 model=1 bus=607 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga607 phases=3 model=1 bus=608 kV=0.38 kw=2 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga608 phases=3 model=1 bus=609 kV=0.38 kw= 1.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga609 phases=3 model=1 bus=610 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga610 phases=3 model=1 bus=611 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga611 phases=3 model=1 bus=612 kV=0.38 kw= 2.5 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga612 phases=3 model=1 bus=613 kV=0.38 kw=1 conn=wye pf=0.92 daily=CurvadecargaA 
+new load.carga613 phases=3 model=1 bus=614 kV=0.38 kw=11 conn=wye pf=0.92 daily=CurvadecargaA 
+
+
+
+Set voltagebases=[69 13.8 0.38] 
+Calcvoltagebases 
+//set mode = daily 
+//set number = 24 
+//set stepsize = 1h
+set mode=daily 
+set number=1 
+set stepsize=1h 
+set hour=0 
+
+//New monitor.linha1_power element=line.linha153 terminal=1 mode=1 ppolar=no
+//New monitor.linha1_voltage element=line.linha53 terminal=1 mode=0
+
+//New monitor.carga2_power element=load.carga244 terminal=1 mode=1 ppolar=no
+New monitor.carga2_voltage element=load.carga330 terminal=1 mode=0
+
+//New energymeter.medidor element=line.linha1 terminal=1
+
+!solve
+
+
+
+LatLongCoords Pasta1.csv
